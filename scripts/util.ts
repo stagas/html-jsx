@@ -23,19 +23,26 @@ const comment = (text: string) =>
 
 export const Union = (els: Element[]) => factory.createUnionTypeNode(els.map(e => factory.createLiteralTypeNode(factory.createStringLiteral(e.name))))
 
-// prettier-ignore
-export const Type = (t: Element) =>
-    special[t.name] ? special[t.name]
-  : (booleans[t.name] ?? t.type === 'Boolean') ? factory.createKeywordTypeNode(ts.SyntaxKind.BooleanKeyword)
-  : (numbers[t.name] ?? (t.type.toLowerCase().endsWith('int') || t.type === 'Float' || t.type === 'Number')) ? factory.createUnionTypeNode([
+namespace Types {
+  export const numberstring = () =>
+    factory.createUnionTypeNode([
       factory.createKeywordTypeNode(ts.SyntaxKind.NumberKeyword),
       factory.createKeywordTypeNode(ts.SyntaxKind.StringKeyword),
     ])
-  : t.type.endsWith('List') ? factory.createUnionTypeNode([
+
+  export const boolean = () => factory.createKeywordTypeNode(ts.SyntaxKind.BooleanKeyword)
+
+  export const list = () =>
+    factory.createUnionTypeNode([
+      factory.createKeywordTypeNode(ts.SyntaxKind.NumberKeyword),
       factory.createKeywordTypeNode(ts.SyntaxKind.StringKeyword),
-      factory.createArrayTypeNode(factory.createKeywordTypeNode(ts.SyntaxKind.StringKeyword)),
+      factory.createArrayTypeNode(numberstring()),
     ])
-  : t.enum ? Union(t.enum.map(e => ({ name: e })) as any)
+}
+
+// prettier-ignore
+export const Type = (t: Element) =>
+    special[t.name] ? special[t.name]
   : t.name.startsWith('on') || t.type === 'Function' ? factory.createTypeReferenceNode(
       factory.createIdentifier("EventHandler"),
       [
@@ -49,6 +56,12 @@ export const Type = (t: Element) =>
         )
       ]
     )
+  : numbers[t.name] ? Types.numberstring()
+  : booleans[t.name] ? Types.boolean()
+  : (t.type.toLowerCase().endsWith('int') || t.type === 'Float' || t.type === 'Number') ? Types.numberstring()
+  : t.type === 'Boolean' ? Types.boolean()
+  : t.type.endsWith('List') ? Types.list()
+  : t.enum ? Union(t.enum.map(e => ({ name: e })) as any)
   : factory.createKeywordTypeNode(ts.SyntaxKind.StringKeyword)
 
 export const Attribute = (p: Element) => [
@@ -116,11 +129,11 @@ const booleans = {
 } as any
 
 const numbers = {
-  value: true,
-  step: true,
-  min: true,
   max: true,
+  min: true,
+  step: true,
   tabindex: true,
+  value: true,
 } as any
 
 export const banned = ['image']

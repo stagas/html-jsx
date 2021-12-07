@@ -176,7 +176,7 @@ export interface HTMLAttributes<T> extends AriaAttributes, DOMAttributes<T> {
   /**
    * Properties that are not descendants of an element with the itemscope attribute can be associated with the item using an itemref. It provides a list of element ids (not itemids) with additional properties elsewhere in the document.
    *  */
-  itemref?: string | string[]
+  itemref?: number | string | (number | string)[]
   /**
    * itemscope (usually) works along with itemtype to specify that the HTML contained in a block is about a particular item. itemscope creates the Item and defines the scope of the itemtype associated with it. itemtype is a valid URL of a vocabulary (such as schema.org) that describes the item and its properties context.
    *  */
@@ -262,7 +262,7 @@ interface AHTMLAttributes<T> extends HTMLAttributes<T> {
   /**
    * A space-separated list of URLs. When the link is followed, the browser will send POST requests with the body PING to the URLs. Typically for tracking.
    *  */
-  ping?: string | string[]
+  ping?: number | string | (number | string)[]
   /**
    * How much of the referrer to send when following the link. no-referrer: The Referer header will not be sent. no-referrer-when-downgrade: The Referer header will not be sent to origins without TLS (HTTPS). origin: The sent referrer will be limited to the origin of the referring page: its scheme, host, and port. origin-when-cross-origin: The referrer sent to other origins will be limited to the scheme, the host, and the port. Navigations on the same origin will still include the path. same-origin: A referrer will be sent for same origin, but cross-origin requests will contain no referrer information. strict-origin: Only send the origin of the document as the referrer when the protocol security level stays the same (HTTPS→HTTPS), but don't send it to a less secure destination (HTTPS→HTTP). strict-origin-when-cross-origin (default): Send a full URL when performing a same-origin request, only send the origin when the protocol security level stays the same (HTTPS→HTTPS), and send no header to a less secure destination (HTTPS→HTTP). unsafe-url: The referrer will include the origin and the path (but not the fragment, password, or username). This value is unsafe, because it leaks origins and paths from TLS-protected resources to insecure origins.
    *  */
@@ -270,7 +270,7 @@ interface AHTMLAttributes<T> extends HTMLAttributes<T> {
   /**
    * The relationship of the linked URL as space-separated link types.
    *  */
-  rel?: string | string[]
+  rel?: number | string | (number | string)[]
   /**
    * Specified a reverse link; the opposite of the rel attribute. Deprecated for being very confusing.
    *  */
@@ -382,7 +382,7 @@ interface AreaHTMLAttributes<T> extends HTMLAttributes<T> {
   /**
    * Contains a space-separated list of URLs to which, when the hyperlink is followed, POST requests with the body PING will be sent by the browser (in the background). Typically used for tracking.
    *  */
-  ping?: string | string[]
+  ping?: number | string | (number | string)[]
   /**
    * A string indicating which referrer to use when fetching the resource: no-referrer: The Referer header will not be sent. no-referrer-when-downgrade: The Referer header will not be sent to origins without TLS (HTTPS). origin: The sent referrer will be limited to the origin of the referring page: its scheme, host, and port. origin-when-cross-origin: The referrer sent to other origins will be limited to the scheme, the host, and the port. Navigations on the same origin will still include the path. same-origin: A referrer will be sent for same origin, but cross-origin requests will contain no referrer information. strict-origin: Only send the origin of the document as the referrer when the protocol security level stays the same (HTTPS→HTTPS), but don't send it to a less secure destination (HTTPS→HTTP). strict-origin-when-cross-origin (default): Send a full URL when performing a same-origin request, only send the origin when the protocol security level stays the same (HTTPS→HTTPS), and send no header to a less secure destination (HTTPS→HTTP). unsafe-url: The referrer will include the origin and the path (but not the fragment, password, or username). This value is unsafe, because it leaks origins and paths from TLS-protected resources to insecure origins.
    *  */
@@ -390,7 +390,7 @@ interface AreaHTMLAttributes<T> extends HTMLAttributes<T> {
   /**
    * For anchors containing the href attribute, this attribute specifies the relationship of the target object to the link object. The value is a space-separated list of link types values. The values and their semantics will be registered by some authority that might have meaning to the document author. The default relationship, if no other is given, is void. Use this attribute only if the href attribute is present.
    *  */
-  rel?: string | string[]
+  rel?: number | string | (number | string)[]
   /**
    * The shape of the associated hot spot. The specifications for HTML defines the values rect, which defines a rectangular region; circle, which defines a circular region; poly, which defines a polygon; and default, which indicates the entire region beyond any defined shapes.
    *  */
@@ -857,7 +857,7 @@ interface FormHTMLAttributes<T> extends HTMLAttributes<T> {
   /**
    * Creates a hyperlink or annotation depending on the value, see the rel attribute for details.
    *  */
-  rel?: string | string[]
+  rel?: number | string | (number | string)[]
   /**
    * Indicates where to display the response after submitting the form. In HTML 4, this is the name/keyword for a frame. In HTML5, it is a name/keyword for a browsing context (for example, tab, window, or iframe). The following keywords have special meanings: _self (default): Load into the same browsing context as the current one. _blank: Load into a new unnamed browsing context. _parent: Load into the parent browsing context of the current one. If no parent, behaves the same as _self. _top: Load into the top-level browsing context (i.e., the browsing context that is an ancestor of the current one and has no parent). If no parent, behaves the same as _self. This value can be overridden by a formtarget attribute on a `<button>`, `<input type="submit">`, or `<input type="image">` element. Note: Setting target="_blank" on `<form>` elements implicitly provides the same rel behavior as setting rel="noopener" which does not set window.opener.
    *  */
@@ -1079,7 +1079,7 @@ interface ImgHTMLAttributes<T> extends HTMLAttributes<T> {
   /**
    * One or more strings separated by commas, indicating a set of source sizes. Each source size consists of: A media condition. This must be omitted for the last item in the list. A source size value. Media Conditions describe properties of the viewport, not of the image. For example, (max-height: 500px) 1000px proposes to use a source of 1000px width, if the viewport is not higher than 500px. Source size values specify the intended display size of the image. User agents use the current source size to select one of the sources supplied by the srcset attribute, when those sources are described using width (w) descriptors. The selected source size affects the intrinsic size of the image (the image’s display size if no CSS styling is applied). If the srcset attribute is absent, or contains no values with a width descriptor, then the sizes attribute has no effect.
    *  */
-  sizes?: string | string[]
+  sizes?: number | string | (number | string)[]
   /**
    * The image URL. Mandatory for the `<img>` element. On browsers supporting srcset, src is treated like a candidate image with a pixel density descriptor 1x, unless an image with this pixel density descriptor is already defined in srcset, or unless srcset contains w descriptors.
    *  */
@@ -1105,7 +1105,7 @@ interface InputHTMLAttributes<T> extends HTMLAttributes<T> {
   /**
    * Valid for the file input type only, the accept attribute defines which file types are selectable in a file upload control. See the file input type.
    *  */
-  accept?: string | string[]
+  accept?: number | string | (number | string)[]
   /**
    * Valid for the image button only, the alt attribute provides alternative text for the image, displaying the value of the attribute if the image scr is missing or otherwise fails to load. See the image input type.
    *  */
@@ -1241,7 +1241,7 @@ interface InputHTMLAttributes<T> extends HTMLAttributes<T> {
   /**
    * The input control's value. When specified in the HTML, this is the initial value, and from then on it can be altered or retrieved at any time using JavaScript to access the respective HTMLInputElement object's value property. The value attribute is always optional, though should be considered mandatory for checkbox, radio, and hidden.
    *  */
-  value?: boolean
+  value?: number | string
   /**
    * {{page("/en-US/docs/Web/HTML/Element/input/file", "webkitdirectory-include")}}
    *  */
@@ -1335,7 +1335,7 @@ interface LinkHTMLAttributes<T> extends HTMLAttributes<T> {
   /**
    * For rel="preload" and as="image" only, the imagesizes attribute is a sizes attribute that indicates to preload the appropriate resource used by an img element with corresponding values for its srcset and sizes attributes.
    *  */
-  imagesizes?: string | string[]
+  imagesizes?: number | string | (number | string)[]
   /**
    * For rel="preload" and as="image" only, the imagesrcset attribute is a sourceset attribute that indicates to preload the appropriate resource used by an img element with corresponding values for its srcset and sizes attributes.
    *  */
@@ -1347,7 +1347,7 @@ interface LinkHTMLAttributes<T> extends HTMLAttributes<T> {
   /**
    * This attribute specifies the media that the linked resource applies to. Its value must be a media type / media query. This attribute is mainly useful when linking to external stylesheets — it allows the user agent to pick the best adapted one for the device it runs on. Notes: In HTML 4, this can only be a simple white-space-separated list of media description literals, i.e., media types and groups, where defined and allowed as values for this attribute, such as print, screen, aural, braille. HTML5 extended this to any kind of media queries, which are a superset of the allowed values of HTML 4. Browsers not supporting CSS3 Media Queries won't necessarily recognize the adequate link; do not forget to set fallback links, the restricted set of media queries defined in HTML 4.
    *  */
-  media?: string | string[]
+  media?: number | string | (number | string)[]
   /**
    * The value of this attribute provides information about the functions that might be performed on an object. The values generally are given by the HTTP protocol when it is used, but it might (for similar reasons as for the title attribute) be useful to include advisory information in advance in the link. For example, the browser might choose a different rendering of a link as a function of the methods specified; something that is searchable might get a different icon, or an outside link might render with an indication of leaving the current site. This attribute is not well understood nor supported, even by the defining browser, Internet Explorer 4.
    *  */
@@ -1363,7 +1363,7 @@ interface LinkHTMLAttributes<T> extends HTMLAttributes<T> {
   /**
    * This attribute names a relationship of the linked document to the current document. The attribute must be a space-separated list of link type values.
    *  */
-  rel?: string | string[]
+  rel?: number | string | (number | string)[]
   /**
    * The value of this attribute shows the relationship of the current document to the linked document, as defined by the href attribute. The attribute thus defines the reverse relationship compared to the value of the rel attribute. Link type values for the attribute are similar to the possible values for rel. Note: This attribute is considered obsolete by the WHATWG HTML living standard (which is the specification MDN treats as canonical). However, it's worth noting that rev is not considered obsolete in the W3C specification. That said, given the uncertainty, relying on rev is unwise. Instead, you should use the rel attribute with the opposite link type value. For example, to establish the reverse link for made, specify author. Also this attribute doesn't stand for "revision" and must not be used with a version number, even though many sites misuse it in this way.
    *  */
@@ -1483,7 +1483,7 @@ interface MetaHTMLAttributes<T> extends HTMLAttributes<T> {
   /**
    *
    *  */
-  media?: string | string[]
+  media?: number | string | (number | string)[]
   /**
    * The name and content attributes can be used together to provide document metadata in terms of name-value pairs, with the name attribute giving the metadata name, and the content attribute giving the value. See standard metadata names for details about the set of standard metadata names defined in the HTML specification.
    *  */
@@ -1773,11 +1773,11 @@ interface SourceHTMLAttributes<T> extends HTMLAttributes<T> {
   /**
    * Media query of the resource's intended media.
    *  */
-  media?: string | string[]
+  media?: number | string | (number | string)[]
   /**
    * Is a list of source sizes that describes the final rendered width of the image represented by the source. Each source size consists of a comma-separated list of media condition-length pairs. This information is used by the browser to determine, before laying the page out, which image defined in srcset to use. Please note that sizes will have its effect only if width dimension descriptors are provided with srcset instead of pixel ratio values (200w instead of 2x for example). The sizes attribute has an effect only when the `<source>` element is the direct child of a `<picture>` element.
    *  */
-  sizes?: string | string[]
+  sizes?: number | string | (number | string)[]
   /**
    * Required for `<audio>` and `<video>`, address of the media resource. The value of this attribute is ignored when the `<source>` element is placed inside a `<picture>` element.
    *  */
@@ -1919,7 +1919,7 @@ interface TdHTMLAttributes<T> extends HTMLAttributes<T> {
   /**
    * This attribute contains a list of space-separated strings, each corresponding to the id attribute of the `<th>` elements that apply to this element.
    *  */
-  headers?: string | string[]
+  headers?: number | string | (number | string)[]
   /**
    * This attribute is used to define a recommended cell height. Use the CSS height property instead.
    *  */
@@ -2053,7 +2053,7 @@ interface ThHTMLAttributes<T> extends HTMLAttributes<T> {
   /**
    * This attribute contains a list of space-separated strings, each corresponding to the id attribute of the `<th>` elements that apply to this element.
    *  */
-  headers?: string | string[]
+  headers?: number | string | (number | string)[]
   /**
    * This attribute is used to define a recommended cell height. Note: Do not use this attribute as it is obsolete in the latest standard: use the CSS height property instead.
    *  */
