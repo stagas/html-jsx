@@ -27,7 +27,7 @@ export const Union = (els: Element[]) => factory.createUnionTypeNode(els.map(e =
 export const Type = (t: Element) =>
     special[t.name] ? special[t.name]
   : (booleans[t.name] ?? t.type === 'Boolean') ? factory.createKeywordTypeNode(ts.SyntaxKind.BooleanKeyword)
-  : (numbers[t.name] ?? (t.type.toLowerCase().endsWith('int') || t.type === 'Number')) ? factory.createUnionTypeNode([
+  : (numbers[t.name] ?? (t.type.toLowerCase().endsWith('int') || t.type === 'Float' || t.type === 'Number')) ? factory.createUnionTypeNode([
       factory.createKeywordTypeNode(ts.SyntaxKind.NumberKeyword),
       factory.createKeywordTypeNode(ts.SyntaxKind.StringKeyword),
     ])
@@ -184,4 +184,8 @@ const special = {
   sandbox: typeref('HTMLIframeSandbox'),
   style: factory.createUnionTypeNode([typeref('CSSProperties'), factory.createKeywordTypeNode(ts.SyntaxKind.StringKeyword)]),
   type: factory.createKeywordTypeNode(ts.SyntaxKind.StringKeyword),
+  value: factory.createUnionTypeNode([
+    factory.createKeywordTypeNode(ts.SyntaxKind.StringKeyword),
+    factory.createKeywordTypeNode(ts.SyntaxKind.NumberKeyword),
+  ]),
 } as any

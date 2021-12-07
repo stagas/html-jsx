@@ -651,7 +651,7 @@ interface ButtonHTMLAttributes<T> extends HTMLAttributes<T> {
   /**
    * Defines the value associated with the button’s name when it’s submitted with the form data. This value is passed to the server in params when the form is submitted using this button.
    *  */
-  value?: string
+  value?: string | number
 }
 interface CanvasHTMLAttributes<T> extends HTMLAttributes<T> {
   /**
@@ -739,7 +739,7 @@ interface DataHTMLAttributes<T> extends HTMLAttributes<T> {
   /**
    * This attribute specifies the machine-readable translation of the content of the element.
    *  */
-  value?: string
+  value?: string | number
 }
 interface DdHTMLAttributes<T> extends HTMLAttributes<T> {
   /**
@@ -1241,7 +1241,7 @@ interface InputHTMLAttributes<T> extends HTMLAttributes<T> {
   /**
    * The input control's value. When specified in the HTML, this is the initial value, and from then on it can be altered or retrieved at any time using JavaScript to access the respective HTMLInputElement object's value property. The value attribute is always optional, though should be considered mandatory for checkbox, radio, and hidden.
    *  */
-  value?: boolean
+  value?: string | number
   /**
    * {{page("/en-US/docs/Web/HTML/Element/input/file", "webkitdirectory-include")}}
    *  */
@@ -1301,7 +1301,7 @@ interface LiHTMLAttributes<T> extends HTMLAttributes<T> {
   /**
    * This integer attribute indicates the current ordinal value of the list item as defined by the `<ol>` element. The only allowed value for this attribute is a number, even if the list is displayed with Roman numerals or letters. List items that follow this one continue numbering from the value set. The value attribute has no meaning for unordered lists (`<ul>`) or for menus (`<menu>`). Note: This attribute was deprecated in HTML4, but reintroduced in HTML5.
    *  */
-  value?: number | string
+  value?: string | number
 }
 interface LinkHTMLAttributes<T> extends HTMLAttributes<T> {
   /**
@@ -1497,27 +1497,27 @@ interface MeterHTMLAttributes<T> extends HTMLAttributes<T> {
   /**
    * The lower numeric bound of the high end of the measured range. This must be less than the maximum value (max attribute), and it also must be greater than the low value and minimum value (low attribute and min attribute, respectively), if any are specified. If unspecified, or if greater than the maximum value, the high value is equal to the maximum value.
    *  */
-  high?: string
+  high?: number | string
   /**
    * The upper numeric bound of the low end of the measured range. This must be greater than the minimum value (min attribute), and it also must be less than the high value and maximum value (high attribute and max attribute, respectively), if any are specified. If unspecified, or if less than the minimum value, the low value is equal to the minimum value.
    *  */
-  low?: string
+  low?: number | string
   /**
    * The upper numeric bound of the measured range. This must be greater than the minimum value (min attribute), if specified. If unspecified, the maximum value is 1.
    *  */
-  max?: string
+  max?: number | string
   /**
    * The lower numeric bound of the measured range. This must be less than the maximum value (max attribute), if specified. If unspecified, the minimum value is 0.
    *  */
-  min?: string
+  min?: number | string
   /**
    * This attribute indicates the optimal numeric value. It must be within the range (as defined by the min attribute and max attribute). When used with the low attribute and high attribute, it gives an indication where along the range is considered preferable. For example, if it is between the min attribute and the low attribute, then the lower range is considered preferred. The browser may color the meter's bar differently depending on whether the value is less than or equal to the optimum value.
    *  */
-  optimum?: string
+  optimum?: number | string
   /**
    * The current numeric value. This must be between the minimum and maximum values (min attribute and max attribute) if they are specified. If unspecified or malformed, the value is 0. If specified, but not within the range given by the min attribute and max attribute, the value is equal to the nearest end of the range. Note: Unless the value attribute is between 0 and 1 (inclusive), the min and max attributes should define the range so that the value attribute's value is within it.
    *  */
-  value?: string
+  value?: string | number
 }
 interface ObjectHTMLAttributes<T> extends HTMLAttributes<T> {
   /**
@@ -1617,7 +1617,7 @@ interface OptionHTMLAttributes<T> extends HTMLAttributes<T> {
   /**
    * The content of this attribute represents the value to be submitted with the form, should this option be selected. If this attribute is omitted, the value is taken from the text content of the option element.
    *  */
-  value?: string
+  value?: string | number
 }
 interface OutputHTMLAttributes<T> extends HTMLAttributes<T> {
   /**
@@ -1645,7 +1645,7 @@ interface ParamHTMLAttributes<T> extends HTMLAttributes<T> {
   /**
    * Specifies the value of the parameter.
    *  */
-  value?: string
+  value?: string | number
   /**
    * Specifies the type of the value attribute. Possible values are: data: Default value. The value is passed to the object's implementation as a string. ref: The value is a URI to a resource where run-time values are stored. object: An ID of another `<object>` in the same document.
    *  */
@@ -1679,11 +1679,11 @@ interface ProgressHTMLAttributes<T> extends HTMLAttributes<T> {
   /**
    * This attribute describes how much work the task indicated by the progress element requires. The max attribute, if present, must have a value greater than 0 and be a valid floating point number. The default value is 1.
    *  */
-  max?: string
+  max?: number | string
   /**
    * This attribute specifies how much of the task that has been completed. It must be a valid floating point number between 0 and max, or between 0 and 1 if max is omitted. If there is no value attribute, the progress bar is indeterminate; this indicates that an activity is ongoing with no indication of how long it is expected to take.
    *  */
-  value?: string
+  value?: string | number
 }
 interface QHTMLAttributes<T> extends HTMLAttributes<T> {
   /**
