@@ -39,22 +39,26 @@ import type * as jsx from '../src'
 // this declaration allows us to augment JSX interfaces
 declare module '../src' {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  interface DOMAttributes<T> {
-    /** Extending dom attributes for all elements, here we introduce a `key` attribute */
-    key?: string | number
+  interface DOMAttributes<T> extends JSX.IntrinsicAttributes {
+    // here we could add attributes specific only to DOM elements (HTML+SVG)
   }
 }
 
 // this introduces our JSX definitions into the global scope
-// to be used by our application
 declare global {
   namespace JSX {
-    /** The type returned by our `createElement` factory */
+    /** The type returned by our `createElement` factory. */
     type Element = string
 
     interface IntrinsicElements extends jsx.IntrinsicElements {
-      /** This allows for any tag to be used */
-      // [k: string]: unknown
+      /** This allows for any tag to be used. */
+      [k: string]: unknown
+    }
+
+    // here we can add attributes for all the elements
+    interface IntrinsicAttributes {
+      /** List index key - each item's `key` must be unique. */
+      key?: string | number
     }
 
     /**

@@ -22,30 +22,36 @@ $ npm i html-jsx
 
 ## Usage
 
-You have to insert this piece of code where the `createElement` (or `h`)
-factory lives in order for TypeScript to correctly use the types:
+Because of the way TypeScript and JSX work, we have to insert this
+piece of code where the `createElement` (or `h`) factory lives in
+order for the types to be picked up correctly by the compiler:
 
 ```ts
 import type * as jsx from 'html-jsx'
 
 // this declaration allows us to augment JSX interfaces
 declare module 'html-jsx' {
-  interface DOMAttributes<T> {
-    /** Extending dom attributes for all elements, here we introduce a `key` attribute */
-    key?: string | number
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  interface DOMAttributes<T> extends JSX.IntrinsicAttributes {
+    // here we could add attributes specific only to DOM elements (HTML+SVG)
   }
 }
 
 // this introduces our JSX definitions into the global scope
-// to be used by our application
 declare global {
   namespace JSX {
-    /** The type returned by our `createElement` (or `h`) factory */
+    /** The type returned by our `createElement` factory. */
     type Element = string
 
     interface IntrinsicElements extends jsx.IntrinsicElements {
-      /** This allows for any tag to be used */
-      // [k: string]: unknown
+      /** This allows for any tag to be used. */
+      [k: string]: unknown
+    }
+
+    // here we can add attributes for all the elements
+    interface IntrinsicAttributes {
+      /** List index key - each item's `key` must be unique. */
+      key?: string | number
     }
 
     /**
@@ -60,7 +66,7 @@ declare global {
 }
 ```
 
-After this, html JSX tags in your application should be properly typed, with intellisense, documentation and lint working.
+After this, html JSX tags in our application(or library) plus anything else that depends on it, should be properly picking up the types, with intellisense, documentation and lint working.
 
 See [playground](playground/) for more usage details.
 
