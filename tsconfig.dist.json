@@ -1,0 +1,15 @@
+{
+  "extends": "./tsconfig.json",
+  "exclude": [
+    "playground",
+    "benchmark",
+    "scripts",
+    "example",
+    "**/*.spec.ts",
+    "**/*.spec.tsx"
+  ],
+  "compilerOptions": {
+    "emitDeclarationOnly": true,
+    "inlineSources": true
+  }
+}

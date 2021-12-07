@@ -1,0 +1,6 @@
+- [ ] Auto-generate SVG
+- [ ] Auto-generate ARIA
+- [ ] Add comments to the HTMLRole union elements somehow
+- [ ] Generate documentation for global event handlers
+- [ ] Dist flavor for camelCased React-style attributes?
+- [ ] Contribute to markuplint to improve some of the documentation scraping
