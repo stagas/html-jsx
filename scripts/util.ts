@@ -183,7 +183,9 @@ const special = {
   role: typeref('HTMLRole'),
   sandbox: typeref('HTMLIframeSandbox'),
   style: factory.createUnionTypeNode([typeref('CSSProperties'), factory.createKeywordTypeNode(ts.SyntaxKind.StringKeyword)]),
-  type: factory.createKeywordTypeNode(ts.SyntaxKind.StringKeyword),
+  type: factory.createKeywordTypeNode(ts.SyntaxKind.StringKeyword), // TODO: this should be fixed in markuplint
+  name: factory.createKeywordTypeNode(ts.SyntaxKind.StringKeyword), // TODO: this should be fixed in markuplint
+  // TODO: this should be fixed in markuplint
   value: factory.createUnionTypeNode([
     factory.createKeywordTypeNode(ts.SyntaxKind.StringKeyword),
     factory.createKeywordTypeNode(ts.SyntaxKind.NumberKeyword),
