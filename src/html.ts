@@ -651,7 +651,7 @@ interface ButtonHTMLAttributes<T> extends HTMLAttributes<T> {
   /**
    * Defines the value associated with the button’s name when it’s submitted with the form data. This value is passed to the server in params when the form is submitted using this button.
    *  */
-  value?: string | number
+  value?: number | string
 }
 interface CanvasHTMLAttributes<T> extends HTMLAttributes<T> {
   /**
@@ -739,7 +739,7 @@ interface DataHTMLAttributes<T> extends HTMLAttributes<T> {
   /**
    * This attribute specifies the machine-readable translation of the content of the element.
    *  */
-  value?: string | number
+  value?: number | string
 }
 interface DdHTMLAttributes<T> extends HTMLAttributes<T> {
   /**
@@ -1173,7 +1173,7 @@ interface InputHTMLAttributes<T> extends HTMLAttributes<T> {
   /**
    * Valid for date, month, week, time, datetime-local, number, and range, it defines the greatest value in the range of permitted values. If the value entered into the element exceeds this, the element fails constraint validation. If the value of the max attribute isn't a number, then the element has no maximum value. There is a special case: if the data type is periodic (such as for dates or times), the value of max may be lower than the value of min, which indicates that the range may wrap around; for example, this allows you to specify a time range from 10 PM to 4 AM.
    *  */
-  max?: string
+  max?: number | string
   /**
    * Valid for text, search, url, tel, email, and password, it defines the maximum number of characters (as UTF-16 code units) the user can enter into the field. This must be an integer value 0 or higher. If no maxlength is specified, or an invalid value is specified, the field has no maximum length. This value must also be greater than or equal to the value of minlength. The input will fail constraint validation if the length of the text entered into the field is greater than maxlength UTF-16 code units long. By default, browsers prevent users from entering more characters than allowed by the maxlength attribute. See Client-side validation for more information.
    *  */
@@ -1181,7 +1181,7 @@ interface InputHTMLAttributes<T> extends HTMLAttributes<T> {
   /**
    * Valid for date, month, week, time, datetime-local, number, and range, it defines the most negative value in the range of permitted values. If the value entered into the element is less than this this, the element fails constraint validation. If the value of the min attribute isn't a number, then the element has no minimum value. This value must be less than or equal to the value of the max attribute. If the min attribute is present but is not specified or is invalid, no min value is applied. If the min attribute is valid and a non-empty value is less than the minimum allowed by the min attribute, constraint validation will prevent form submission. See Client-side validation for more information. There is a special case: if the data type is periodic (such as for dates or times), the value of max may be lower than the value of min, which indicates that the range may wrap around; for example, this allows you to specify a time range from 10 PM to 4 AM.
    *  */
-  min?: string
+  min?: number | string
   /**
    * Valid for text, search, url, tel, email, and password, it defines the minimum number of characters (as UTF-16 code units) the user can enter into the entry field. This must be an non-negative integer value smaller than or equal to the value specified by maxlength. If no minlength is specified, or an invalid value is specified, the input has no minimum length. The input will fail constraint validation if the length of the text entered into the field is fewer than minlength UTF-16 code units long, preventing form submission. See Client-side validation for more information.
    *  */
@@ -1233,7 +1233,7 @@ interface InputHTMLAttributes<T> extends HTMLAttributes<T> {
   /**
    * Valid for the numeric input types, including number, date/time input types, and range, the step attribute is a number that specifies the granularity that the value must adhere to. If not explicitly included: step defaults to 1 for number and range. For the date/time input types, step is expressed in seconds, with the default step being 60 seconds. The step scale factor is 1000 (which converts the seconds to milliseconds, as used in other algorithms). The value must be a positive number—integer or float—or the special value any, which means no stepping is implied, and any value is allowed (barring other constraints, such as min and max). If any is not explicity set, valid values for the number, date/time input types, and range input types are equal to the basis for stepping — the min value and increments of the step value, up to the max value, if specified. For example, if you have `<input type="number" min="10" step="2">`, then any even integer, 10 or greater, is valid. If omitted, `<input type="number">`, any integer is valid, but floats (like 4.2) are not valid, because step defaults to 1. For 4.2 to be valid, step would have had to be set to any, 0.1, 0.2, or any the min value would have had to be a number ending in .2, such as `<input type="number" min="-5.2">` Note: When the data entered by the user doesn't adhere to the stepping configuration, the value is considered invalid in contraint validation and will match the :invalid pseudoclass. See Client-side validation for more information.
    *  */
-  step?: string
+  step?: number | string
   /**
    * A string specifying the type of control to render. For example, to create a checkbox, a value of checkbox is used. If omitted (or an unknown value is specified), the input type text is used, creating a plaintext input field. Permitted values are listed in Input types above.
    *  */
@@ -1241,7 +1241,7 @@ interface InputHTMLAttributes<T> extends HTMLAttributes<T> {
   /**
    * The input control's value. When specified in the HTML, this is the initial value, and from then on it can be altered or retrieved at any time using JavaScript to access the respective HTMLInputElement object's value property. The value attribute is always optional, though should be considered mandatory for checkbox, radio, and hidden.
    *  */
-  value?: string | number
+  value?: boolean
   /**
    * {{page("/en-US/docs/Web/HTML/Element/input/file", "webkitdirectory-include")}}
    *  */
@@ -1301,7 +1301,7 @@ interface LiHTMLAttributes<T> extends HTMLAttributes<T> {
   /**
    * This integer attribute indicates the current ordinal value of the list item as defined by the `<ol>` element. The only allowed value for this attribute is a number, even if the list is displayed with Roman numerals or letters. List items that follow this one continue numbering from the value set. The value attribute has no meaning for unordered lists (`<ul>`) or for menus (`<menu>`). Note: This attribute was deprecated in HTML4, but reintroduced in HTML5.
    *  */
-  value?: string | number
+  value?: number | string
 }
 interface LinkHTMLAttributes<T> extends HTMLAttributes<T> {
   /**
@@ -1517,7 +1517,7 @@ interface MeterHTMLAttributes<T> extends HTMLAttributes<T> {
   /**
    * The current numeric value. This must be between the minimum and maximum values (min attribute and max attribute) if they are specified. If unspecified or malformed, the value is 0. If specified, but not within the range given by the min attribute and max attribute, the value is equal to the nearest end of the range. Note: Unless the value attribute is between 0 and 1 (inclusive), the min and max attributes should define the range so that the value attribute's value is within it.
    *  */
-  value?: string | number
+  value?: number | string
 }
 interface ObjectHTMLAttributes<T> extends HTMLAttributes<T> {
   /**
@@ -1617,7 +1617,7 @@ interface OptionHTMLAttributes<T> extends HTMLAttributes<T> {
   /**
    * The content of this attribute represents the value to be submitted with the form, should this option be selected. If this attribute is omitted, the value is taken from the text content of the option element.
    *  */
-  value?: string | number
+  value?: number | string
 }
 interface OutputHTMLAttributes<T> extends HTMLAttributes<T> {
   /**
@@ -1645,7 +1645,7 @@ interface ParamHTMLAttributes<T> extends HTMLAttributes<T> {
   /**
    * Specifies the value of the parameter.
    *  */
-  value?: string | number
+  value?: number | string
   /**
    * Specifies the type of the value attribute. Possible values are: data: Default value. The value is passed to the object's implementation as a string. ref: The value is a URI to a resource where run-time values are stored. object: An ID of another `<object>` in the same document.
    *  */
@@ -1683,7 +1683,7 @@ interface ProgressHTMLAttributes<T> extends HTMLAttributes<T> {
   /**
    * This attribute specifies how much of the task that has been completed. It must be a valid floating point number between 0 and max, or between 0 and 1 if max is omitted. If there is no value attribute, the progress bar is indeterminate; this indicates that an activity is ongoing with no indication of how long it is expected to take.
    *  */
-  value?: string | number
+  value?: number | string
 }
 interface QHTMLAttributes<T> extends HTMLAttributes<T> {
   /**
