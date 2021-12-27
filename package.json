@@ -16,14 +16,13 @@
     "types",
     "typings"
   ],
-  "main": "./dist/index.js",
+  "module": "./dist/index.esm.js",
+  "main": "./dist/index.cjs.js",
   "types": "./dist/index.d.ts",
-  "targets": {
-    "main": {
-      "context": "node",
-      "engines": {
-        "node": ">=16.0"
-      }
+  "exports": {
+    ".": {
+      "import": "./dist/index.esm.js",
+      "require": "./dist/index.cjs.js"
     }
   },
   "files": [
@@ -42,13 +41,14 @@
     "docs:watch": "onchange -i src --await-write-finish 400 -- npm run docs",
     "test:watch": "jest --watchAll",
     "cov:watch": "jest --coverage --watchAll",
-    "build:all": "npm run gen && npm run build:types && npm run build:js",
+    "build:all": "npm run gen && npm run build:types && npm run build:cjs && npm run build:esm",
     "build:types": "tsc -p tsconfig.dist.json",
-    "build:js": "echo \"module.exports = {}\" >dist/index.js",
+    "build:cjs": "echo \"module.exports = {}\" >dist/index.cjs.js",
+    "build:esm": "echo \"export default {}\" >dist/index.esm.js",
     "build:min": "esbuild src/index.ts --bundle --format=esm | terser --compress --module --mangle -o build.min.js",
     "lint:fix": "eslint --fix src && prettier --write src",
     "clean": "rimraf dist",
-    "prepack": "npm run build",
+    "prepack": "npm run clean && npm run build",
     "prepack:dry": "npm pack --dry-run",
     "prepare": "husky install"
   },
