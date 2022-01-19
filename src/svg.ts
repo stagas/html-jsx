@@ -163,7 +163,7 @@ interface PresentationSVGAttributes {
   'flood-color'?: string
   'flood-opacity'?: number | string | 'inherit'
   'font-family'?: string
-  'font-size'?: string
+  'font-size'?: number | string
   'font-size-adjust'?: number | string
   'font-stretch'?: string
   'font-style'?: 'normal' | 'italic' | 'oblique' | 'inherit'
