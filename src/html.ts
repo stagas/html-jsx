@@ -144,14 +144,7 @@ export interface HTMLAttributes<T> extends AriaAttributes, DOMAttributes<T> {
   /**
    * Hints what action label (or icon) to present for the enter key on virtual keyboards.
    */
-  enterkeyhint?:
-    | 'enter'
-    | 'done'
-    | 'go'
-    | 'next'
-    | 'previous'
-    | 'search'
-    | 'send'
+  enterkeyhint?: 'enter' | 'done' | 'go' | 'next' | 'previous' | 'search' | 'send'
   /**
    * Used to transitively export shadow parts from a nested shadow tree into a containing light tree.
    */
@@ -167,15 +160,7 @@ export interface HTMLAttributes<T> extends AriaAttributes, DOMAttributes<T> {
   /**
    * Provides a hint to browsers as to the type of virtual keyboard configuration to use when editing this element or its contents. Used primarily on `<input>` elements, but is usable on any element while in contenteditable mode.
    */
-  inputmode?:
-    | 'none'
-    | 'text'
-    | 'tel'
-    | 'url'
-    | 'email'
-    | 'numeric'
-    | 'decimal'
-    | 'search'
+  inputmode?: 'none' | 'text' | 'tel' | 'url' | 'email' | 'numeric' | 'decimal' | 'search'
   /**
    * Allows you to specify that a standard HTML element should behave like a registered custom built-in element (see Using custom elements for more details).
    */
@@ -471,7 +456,8 @@ interface BasefontHTMLAttributes<T> extends HTMLAttributes<T> {
    */
   size?: string
 }
-interface BdoHTMLAttributes<T> extends HTMLAttributes<T> {}
+interface BdoHTMLAttributes<T> extends HTMLAttributes<T> {
+}
 interface BgsoundHTMLAttributes<T> extends HTMLAttributes<T> {
   /**
    * This attribute defines a number between -10,000 and +10,000 that determines how the volume will be divided between the speakers.
@@ -626,10 +612,7 @@ interface ButtonHTMLAttributes<T> extends HTMLAttributes<T> {
   /**
    * If the button is a submit button (it's inside/associated with a `<form>` and doesn't have type="button"), specifies how to encode the form data that is submitted. Possible values: application/x-www-form-urlencoded: The default if the attribute is not used. multipart/form-data: Use to submit `<input>` elements with their type attributes set to file. text/plain: Specified as a debugging aid; shouldn’t be used for real form submission. If this attribute is specified, it overrides the enctype attribute of the button's form owner.
    */
-  formenctype?:
-    | 'application/x-www-form-urlencoded'
-    | 'multipart/form-data'
-    | 'text/plain'
+  formenctype?: 'application/x-www-form-urlencoded' | 'multipart/form-data' | 'text/plain'
   /**
    * If the button is a submit button (it's inside/associated with a `<form>` and doesn't have type="button"), this attribute specifies the HTTP method used to submit the form. Possible values: post: The data from the form are included in the body of the HTTP request when sent to the server. Use when the form contains information that shouldn’t be public, like login credentials. get: The form data are appended to the form's action URL, with a ? as a separator, and the resulting URL is sent to the server. Use this method when the form has no side effects, like search forms. If specified, this attribute overrides the method attribute of the button's form owner.
    */
@@ -1147,10 +1130,7 @@ interface InputHTMLAttributes<T> extends HTMLAttributes<T> {
   /**
    * Valid for the image and submit input types only. See the submit input type for more information.
    */
-  formenctype?:
-    | 'application/x-www-form-urlencoded'
-    | 'multipart/form-data'
-    | 'text/plain'
+  formenctype?: 'application/x-www-form-urlencoded' | 'multipart/form-data' | 'text/plain'
   /**
    * Valid for the image and submit input types only. See the submit input type for more information.
    */
@@ -1480,12 +1460,7 @@ interface MetaHTMLAttributes<T> extends HTMLAttributes<T> {
   /**
    * Defines a pragma directive. The attribute is named http-equiv(alent) because all the allowed values are names of particular HTTP headers: content-security-policy Allows page authors to define a content policy for the current page. Content policies mostly specify allowed server origins and script endpoints which help guard against cross-site scripting attacks. content-type Declares the MIME type and character encoding of the document. If specified, the content attribute must have the value "text/html; charset=utf-8". This is equivalent to a `<meta>` element with the charset attribute specified, and carries the same restriction on placement within the document. Note: Can only be used in documents served with a text/html — not in documents served with an XML MIME type. default-style Sets the name of the default CSS style sheet set. x-ua-compatible If specified, the content attribute must have the value "IE=edge". User agents are required to ignore this pragma. refresh This instruction specifies: The number of seconds until the page should be reloaded - only if the content attribute contains a positive integer. The number of seconds until the page should redirect to another - only if the content attribute contains a positive integer followed by the string ';url=', and a valid URL. Accessibility concerns Pages set with a refresh value run the risk of having the time interval being too short. People navigating with the aid of assistive technology such as a screen reader may be unable to read through and understand the page's content before being automatically redirected. The abrupt, unannounced updating of the page content may also be disorienting for people experiencing low vision conditions. MDN Understanding WCAG, Guideline 2.1 explanations MDN Understanding WCAG, Guideline 3.1 explanations Understanding Success Criterion 2.2.1 | W3C Understanding WCAG 2.0 Understanding Success Criterion 2.2.4 | W3C Understanding WCAG 2.0 Understanding Success Criterion 3.2.5 | W3C Understanding WCAG 2.0
    */
-  'http-equiv'?:
-    | 'content-type'
-    | 'default-style'
-    | 'refresh'
-    | 'x-ua-compatible'
-    | 'content-security-policy'
+  'http-equiv'?: 'content-type' | 'default-style' | 'refresh' | 'x-ua-compatible' | 'content-security-policy'
   /** */
   media?: number | string | (number | string)[]
   /**

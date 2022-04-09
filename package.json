@@ -52,7 +52,7 @@
   ],
   "scripts": {
     "build": "rollup-type-bundler --dist ./types --build-script build:all && echo done.",
-    "gen": "node -r esbuild-register scripts/gen.ts && prettier --write src/html.ts",
+    "gen": "node -r esbuild-register scripts/gen.ts",
     "docs": "echo no api docs",
     "test": "node --expose-gc node_modules/jest-cli/bin/jest",
     "test:web": "web-test-runner",
@@ -110,7 +110,6 @@
     "jest": "27.5.1",
     "jest-browser-globals": "25.1.0-beta",
     "onchange": "7.1.0",
-    "prettier": "^2.5.1",
     "pull-configs": "^0.2.0",
     "rimraf": "3.0.2",
     "swcno": "0.1.1",
