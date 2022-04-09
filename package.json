@@ -3,7 +3,7 @@
   "author": "stagas",
   "short": "stagas/html-jsx",
   "description": "Extensible jsx type definitions for standard html interfaces.",
-  "version": "0.2.3",
+  "version": "0.3.0",
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -62,7 +62,7 @@
     "docs:watch": "onchange -i src --await-write-finish 400 -- npm run docs",
     "test:watch": "node --expose-gc node_modules/jest-cli/bin/jest --watchAll",
     "cov:watch": "node --expose-gc node_modules/jest-cli/bin/jest --coverage --watchAll",
-    "build:all": "npm run gen && npm run build:types && npm run build:js && npm run build:js:tiny",
+    "build:all": "npm run gen && npm run build:types && npm run build:js && npm run build:js:tiny && npm run lint:fix",
     "build:types": "tsc -p tsconfig.types.json --outDir types && mkdir -p dist/types && cp types/* dist/types/ && echo 'export {}' >dist/types/index.js",
     "build:js": "npm run build:cjs && npm run build:esm",
     "build:js:tiny": "npm run build:cjs:tiny && npm run build:esm:tiny",

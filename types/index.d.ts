@@ -1,4 +1,4 @@
-import { StandardProperties } from 'csstype'
+import { StandardProperties } from 'csstype';
 
 interface AriaAttributes {
   /** Identifies the currently active element when DOM focus is on a composite widget, textbox, group, or application. */
@@ -5274,22 +5274,4 @@ interface SVGElements {
 interface IntrinsicElements extends HTMLElements, SVGElements {
 }
 
-export {
-  DOMAttributes,
-  EventHandler,
-  HTMLAttributes,
-  HTMLAutocapitalize,
-  HTMLAutocomplete,
-  HTMLCrossorigin,
-  HTMLDir,
-  HTMLElements,
-  HTMLFormEncType,
-  HTMLFormMethod,
-  HTMLIframeSandbox,
-  HTMLLinkAs,
-  HTMLReferrerPolicy,
-  HTMLRole,
-  IntrinsicElements,
-  SVGAttributes,
-  SVGElements,
-}
+export { DOMAttributes, EventHandler, HTMLAttributes, HTMLAutocapitalize, HTMLAutocomplete, HTMLCrossorigin, HTMLDir, HTMLElements, HTMLFormEncType, HTMLFormMethod, HTMLIframeSandbox, HTMLLinkAs, HTMLReferrerPolicy, HTMLRole, IntrinsicElements, SVGAttributes, SVGElements };
