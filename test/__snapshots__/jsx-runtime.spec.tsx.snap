@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`html-jsx component 1`] = `"<label>foo</label>"`;
+
+exports[`html-jsx fragment 1`] = `"<div>hello world</div>  <p>a paragraph</p>"`;
+
+exports[`html-jsx list 1`] = `"<ul><li>1</li>  <li>2</li>  <li>3</li></ul>"`;
+
+exports[`html-jsx renders attributes 1`] = `"<input type=\\"text\\" value=\\"hello w&quot;orld\\"></input>"`;
+
+exports[`html-jsx renders jsx to text 1`] = `"<div>hello world</div>"`;

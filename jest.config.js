@@ -1,16 +1,41 @@
 module.exports = {
-  testEnvironment: 'node', // or 'jsdom'
-  rootDir: 'src',
+  testEnvironment: 'jsdom', // 'node'
+  rootDir: '.',
+  roots: ['<rootDir>/test/', '<rootDir>/src'],
   testMatch: ['**/*.spec.{js,jsx,ts,tsx}'],
-  coverageDirectory: '../coverage',
+  testPathIgnorePatterns: ['<rootDir>/node_modules/', '<rootDir>/test/web/'],
+  coverageDirectory: '<rootDir>/coverage',
+  collectCoverageFrom: ['src/**/*.{ts,tsx}'],
+  coverageProvider: 'v8',
+  resolver: require.resolve('@stagas/jest-node-exports-resolver'),
+  // preset: 'ts-jest',
   transform: {
     '\\.(js|jsx|ts|tsx)$': [
-      '@stagas/sucrase-jest-plugin',
+      '@swc-node/jest',
       {
-        jsxPragma: 'h',
-        jsxFragmentPragma: 'Fragment',
-        production: true,
-        disableESTransforms: true,
+        swc: {
+          jsc: {
+            target: 'es2022',
+            parser: {
+              syntax: 'typescript',
+              tsx: true,
+              decorators: true,
+              dynamicImport: true,
+            },
+            transform: {
+              legacyDecorator: true,
+              decoratorMetadata: true,
+              useDefineForClassFields: true,
+              react: {
+                runtime: 'automatic',
+              },
+              hidden: {
+                jest: true,
+              },
+            },
+            keepClassNames: true,
+          },
+        },
       },
     ],
   },

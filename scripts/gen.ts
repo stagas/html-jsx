@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import spec from '@markuplint/html-spec/index.json'
 import * as fs from 'fs'
 import { join } from 'path'
 import ts, { factory } from 'typescript'
-import spec from '@markuplint/html-spec/index.json'
-import { Union, Attribute, ElementInterface, ElementProperty, banned } from './util'
+import { Attribute, banned, ElementInterface, ElementProperty, Union } from './util'
 
 const rootDir = join(__dirname, '..')
 
@@ -20,7 +20,11 @@ const output = [
       false,
       undefined,
       factory.createNamedImports([
-        factory.createImportSpecifier(false, factory.createIdentifier('StandardProperties'), factory.createIdentifier('CSSProperties')),
+        factory.createImportSpecifier(
+          false,
+          factory.createIdentifier('StandardProperties'),
+          factory.createIdentifier('CSSProperties')
+        ),
       ])
     ),
     factory.createStringLiteral('csstype'),
@@ -32,7 +36,9 @@ const output = [
     factory.createImportClause(
       false,
       undefined,
-      factory.createNamedImports([factory.createImportSpecifier(false, undefined, factory.createIdentifier('AriaAttributes'))])
+      factory.createNamedImports([
+        factory.createImportSpecifier(false, undefined, factory.createIdentifier('AriaAttributes')),
+      ])
     ),
     factory.createStringLiteral('./aria'),
     undefined

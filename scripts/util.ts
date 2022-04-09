@@ -16,12 +16,16 @@ const comment = (text: string) =>
     factory.createNodeArray(
       text
         .split('\n')
-        .map(line => [factory.createJSDocText(line.replace(/&/g, '&amp;').replace(/<([^>]*)>/g, m => `\`${m}\``)), factory.createJSDocText('\n')])
+        .map(line => [
+          factory.createJSDocText(line.replace(/&/g, '&amp;').replace(/<([^>]*)>/g, m => `\`${m}\``)),
+          factory.createJSDocText('\n'),
+        ])
         .flat()
     )
   )
 
-export const Union = (els: Element[]) => factory.createUnionTypeNode(els.map(e => factory.createLiteralTypeNode(factory.createStringLiteral(e.name))))
+export const Union = (els: Element[]) =>
+  factory.createUnionTypeNode(els.map(e => factory.createLiteralTypeNode(factory.createStringLiteral(e.name))))
 
 namespace Types {
   export const numberstring = () =>
@@ -42,27 +46,35 @@ namespace Types {
 
 // prettier-ignore
 export const Type = (t: Element) =>
-    special[t.name] ? special[t.name]
-  : t.name.startsWith('on') || t.type === 'Function' ? factory.createTypeReferenceNode(
-      factory.createIdentifier("EventHandler"),
+  special[t.name]
+    ? special[t.name]
+    : t.name.startsWith('on') || t.type === 'Function'
+    ? factory.createTypeReferenceNode(
+      factory.createIdentifier('EventHandler'),
       [
         factory.createTypeReferenceNode(
-          factory.createIdentifier("T"),
+          factory.createIdentifier('T'),
           undefined
         ),
         factory.createTypeReferenceNode(
-          factory.createIdentifier("Event"),
+          factory.createIdentifier('Event'),
           undefined
-        )
+        ),
       ]
     )
-  : numbers[t.name] ? Types.numberstring()
-  : booleans[t.name] ? Types.boolean()
-  : (t.type.toLowerCase().endsWith('int') || t.type === 'Float' || t.type === 'Number') ? Types.numberstring()
-  : t.type === 'Boolean' ? Types.boolean()
-  : t.type.endsWith('List') ? Types.list()
-  : t.enum ? Union(t.enum.map(e => ({ name: e })) as any)
-  : factory.createKeywordTypeNode(ts.SyntaxKind.StringKeyword)
+    : numbers[t.name]
+    ? Types.numberstring()
+    : booleans[t.name]
+    ? Types.boolean()
+    : (t.type.toLowerCase().endsWith('int') || t.type === 'Float' || t.type === 'Number')
+    ? Types.numberstring()
+    : t.type === 'Boolean'
+    ? Types.boolean()
+    : t.type.endsWith('List')
+    ? Types.list()
+    : t.enum
+    ? Union(t.enum.map(e => ({ name: e })) as any)
+    : factory.createKeywordTypeNode(ts.SyntaxKind.StringKeyword)
 
 export const Attribute = (p: Element) => [
   comment(p.description),
@@ -77,44 +89,52 @@ export const Attribute = (p: Element) => [
 export const ElementInterface = (e: Element, globalAttrs: string[]) =>
   attrs(e).length
     ? factory.createInterfaceDeclaration(
-        undefined,
-        undefined,
-        factory.createIdentifier(pascal(e.name) + 'HTMLAttributes'),
-        [factory.createTypeParameterDeclaration(factory.createIdentifier('T'), undefined, undefined)],
-        [
-          factory.createHeritageClause(ts.SyntaxKind.ExtendsKeyword, [
-            factory.createExpressionWithTypeArguments(factory.createIdentifier('HTMLAttributes'), [
-              factory.createTypeReferenceNode(factory.createIdentifier('T'), undefined),
-            ]),
+      undefined,
+      undefined,
+      factory.createIdentifier(pascal(e.name) + 'HTMLAttributes'),
+      [factory.createTypeParameterDeclaration(factory.createIdentifier('T'), undefined, undefined)],
+      [
+        factory.createHeritageClause(ts.SyntaxKind.ExtendsKeyword, [
+          factory.createExpressionWithTypeArguments(factory.createIdentifier('HTMLAttributes'), [
+            factory.createTypeReferenceNode(factory.createIdentifier('T'), undefined),
           ]),
-        ],
-        attrs(e)
-          .filter(a => !globalAttrs.includes(a.name))
-          .map(Attribute)
-          .flat()
-          .filter(Boolean) as any
-      )
+        ]),
+      ],
+      attrs(e)
+        .filter(a => !globalAttrs.includes(a.name))
+        .map(Attribute)
+        .flat()
+        .filter(Boolean) as any
+    )
     : undefined
 
 export const ElementProperty = (e: Element) => [
   comment(
-    e.description +
-      (e.permittedStructures.contents && e.permittedStructures.summary.length ? '\n\n**Content:** ' + e.permittedStructures.summary : '') +
-      (attrs(e).length
-        ? `\n\n| Attribute | Type | Description\n|--|--|--\n` +
-          attrs(e)
+    e.description
+      + (e.permittedStructures.contents && e.permittedStructures.summary.length
+        ? '\n\n**Content:** ' + e.permittedStructures.summary
+        : '')
+      + (attrs(e).length
+        ? `\n\n| Attribute | Type | Description\n|--|--|--\n`
+          + attrs(e)
             .map(e => `| \`${e.name}\` | _${e.type}_ | ${e.description.split('.')[0]}.`)
             .join('\n')
-        : '') +
-      (e.cite ? `\n\n[${e.cite.includes('mozilla') ? 'MDN ' : ''}Reference](${e.cite})` : '')
+        : '')
+      + (e.cite ? `\n\n[${e.cite.includes('mozilla') ? 'MDN ' : ''}Reference](${e.cite})` : '')
   ),
   factory.createPropertySignature(
     undefined,
     factory.createIdentifier(e.name),
     undefined,
-    factory.createTypeReferenceNode(factory.createIdentifier((attrs(e).length ? pascal(e.name) : '') + 'HTMLAttributes'), [
-      factory.createTypeReferenceNode(factory.createIdentifier(`HTML${attrs(e).length ? ids[e.name] ?? pascal(e.name) : ''}Element`), undefined),
-    ])
+    factory.createTypeReferenceNode(
+      factory.createIdentifier((attrs(e).length ? pascal(e.name) : '') + 'HTMLAttributes'),
+      [
+        factory.createTypeReferenceNode(
+          factory.createIdentifier(`HTML${attrs(e).length ? ids[e.name] ?? pascal(e.name) : ''}Element`),
+          undefined
+        ),
+      ]
+    )
   ),
 ]
 
@@ -199,7 +219,10 @@ const special = {
   referrerpolicy: typeref('HTMLReferrerPolicy'),
   role: typeref('HTMLRole'),
   sandbox: typeref('HTMLIframeSandbox'),
-  style: factory.createUnionTypeNode([typeref('CSSProperties'), factory.createKeywordTypeNode(ts.SyntaxKind.StringKeyword)]),
+  style: factory.createUnionTypeNode([
+    typeref('CSSProperties'),
+    factory.createKeywordTypeNode(ts.SyntaxKind.StringKeyword),
+  ]),
   type: factory.createKeywordTypeNode(ts.SyntaxKind.StringKeyword), // TODO: this should be fixed in markuplint
   name: factory.createKeywordTypeNode(ts.SyntaxKind.StringKeyword), // TODO: this should be fixed in markuplint
 } as any

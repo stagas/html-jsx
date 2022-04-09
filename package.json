@@ -2,7 +2,7 @@
   "name": "html-jsx",
   "author": "stagas",
   "short": "stagas/html-jsx",
-  "description": "extensible jsx type definitions for standard html interfaces",
+  "description": "Extensible jsx type definitions for standard html interfaces.",
   "version": "0.2.3",
   "license": "MIT",
   "repository": {
@@ -16,72 +16,120 @@
     "types",
     "typings"
   ],
-  "module": "./dist/index.esm.js",
-  "main": "./dist/index.cjs.js",
-  "types": "./dist/index.d.ts",
+  "module": "./dist/esm/index.js",
+  "main": "./dist/cjs/index.js",
+  "types": "./dist/types/index.d.ts",
   "exports": {
     ".": {
-      "import": "./dist/index.esm.js",
-      "require": "./dist/index.cjs.js"
+      "import": "./dist/esm/index.js",
+      "require": "./dist/cjs/index.js"
+    },
+    "./jsx-runtime": {
+      "import": "./dist/esm/jsx-runtime.js",
+      "require": "./dist/cjs/jsx-runtime.js"
+    },
+    "./tiny": {
+      "import": "./dist/esm-tiny/index.js",
+      "require": "./dist/cjs-tiny/index.js"
+    },
+    "./tiny/jsx-runtime": {
+      "import": "./dist/esm-tiny/jsx-runtime.js",
+      "require": "./dist/cjs-tiny/jsx-runtime.js"
+    }
+  },
+  "typesVersions": {
+    "*": {
+      "jsx-runtime": [
+        "./dist/cjs/jsx-runtime.d.ts"
+      ],
+      "tiny/jsx-runtime": [
+        "./dist/cjs-tiny/jsx-runtime.d.ts"
+      ]
     }
   },
   "files": [
     "dist"
   ],
   "scripts": {
-    "build": "rollup-type-bundler --dist ./dist --build-script build:all && echo done.",
+    "build": "rollup-type-bundler --dist ./types --build-script build:all && echo done.",
     "gen": "node -r esbuild-register scripts/gen.ts && prettier --write src/html.ts",
     "docs": "echo no api docs",
-    "test": "echo ok",
+    "test": "node --expose-gc node_modules/jest-cli/bin/jest",
     "test:web": "web-test-runner",
-    "cov": "jest --coverage",
+    "cov": "node --expose-gc node_modules/jest-cli/bin/jest --coverage",
     "playground": "vite --force --cors --https --clearScreen=false --open /playground/",
-    "lint": "eslint src && prettier --check src",
     "build:watch": "onchange -i src --await-write-finish 400 -- npm run build",
     "docs:watch": "onchange -i src --await-write-finish 400 -- npm run docs",
-    "test:watch": "jest --watchAll",
-    "cov:watch": "jest --coverage --watchAll",
-    "build:all": "npm run gen && npm run build:types && npm run build:cjs && npm run build:esm",
-    "build:types": "tsc -p tsconfig.dist.json",
-    "build:cjs": "echo \"module.exports = {}\" >dist/index.cjs.js",
-    "build:esm": "echo \"export default {}\" >dist/index.esm.js",
-    "build:min": "esbuild src/index.ts --bundle --format=esm | terser --compress --module --mangle -o build.min.js",
-    "lint:fix": "eslint --fix src && prettier --write src",
+    "test:watch": "node --expose-gc node_modules/jest-cli/bin/jest --watchAll",
+    "cov:watch": "node --expose-gc node_modules/jest-cli/bin/jest --coverage --watchAll",
+    "build:all": "npm run gen && npm run build:types && npm run build:js && npm run build:js:tiny",
+    "build:types": "tsc -p tsconfig.types.json --outDir types && mkdir -p dist/types && cp types/* dist/types/ && echo 'export {}' >dist/types/index.js",
+    "build:js": "npm run build:cjs && npm run build:esm",
+    "build:js:tiny": "npm run build:cjs:tiny && npm run build:esm:tiny",
+    "build:cjs": "tsc -p jsx/tsconfig.json --outDir dist/cjs",
+    "build:esm": "tsc -p jsx/tsconfig.json --outDir dist/esm --module esnext && echo '{\"type\":\"module\"}' >dist/esm/package.json",
+    "build:cjs:tiny": "tsc -p tiny/tsconfig.json --outDir dist/cjs-tiny",
+    "build:esm:tiny": "tsc -p tiny/tsconfig.json --outDir dist/esm-tiny --module esnext && echo '{\"type\":\"module\"}' >dist/esm-tiny/package.json",
+    "build:min": "esbuild dist/esm/jsx-runtime.js --bundle --format=esm | terser --compress --module --mangle -o \"$(cat package.json | jq -r '.name').min.js\" && wc -c \"$(cat package.json | jq -r '.name').min.js\"",
+    "build:bundle": "esbuild dist/esm/jsx-runtime.js --bundle --format=esm --outfile=\"$(cat package.json | jq -r '.name').js\" && wc -c \"$(cat package.json | jq -r '.name').js\"",
+    "lint": "eslint src && dprint check",
+    "lint:fix": "eslint --fix src && dprint fmt",
     "clean": "rimraf dist",
     "prepack": "npm run clean && npm run build",
     "prepack:dry": "npm pack --dry-run",
+    "prepush": "npm run lint && npm run test",
     "prepare": "husky install"
   },
   "devDependencies": {
-    "@favware/rollup-type-bundler": "^1.0.6",
+    "@favware/rollup-type-bundler": "^1.0.7",
     "@markuplint/html-spec": "^1.8.2",
-    "@stagas/sucrase-jest-plugin": "^2.2.0-fork",
-    "@tsconfig/node16": "^1.0.2",
-    "@types/jest": "^27.0.3",
-    "@types/node": "^17.0.5",
-    "@types/web": "^0.0.48",
-    "@typescript-eslint/eslint-plugin": "^5.8.0",
-    "@typescript-eslint/parser": "^5.8.0",
-    "@typescript/lib-dom": "npm:@types/web@^0.0.48",
-    "@web/dev-server-esbuild": "^0.2.16",
-    "@web/test-runner": "^0.13.23",
-    "esbuild": "^0.14.8",
-    "esbuild-register": "^3.3.0",
-    "eslint": "^8.5.0",
-    "eslint-config-html-jsx": "^1.0.0",
-    "eslint-plugin-import": "^2.25.3",
-    "husky": "^7.0.4",
-    "jest": "^27.4.5",
-    "jest-browser-globals": "^25.1.0-beta",
-    "onchange": "^7.1.0",
+    "@n1kk/intspector": "1.0.2",
+    "@rollup/plugin-commonjs": "21.0.3",
+    "@stagas/jest-node-exports-resolver": "1.1.5-require-basedir-2",
+    "@swc-node/jest": "1.4.3",
+    "@swc/cli": "0.1.56",
+    "@swc/core": "1.2.160",
+    "@tsconfig/node16": "1.0.2",
+    "@types/jest": "27.4.1",
+    "@types/node": "17.0.23",
+    "@types/web": "^0.0.56",
+    "@typescript-eslint/eslint-plugin": "5.16.0",
+    "@typescript-eslint/parser": "5.16.0",
+    "@typescript/lib-dom": "npm:@types/web@^0.0.56",
+    "@web/dev-server-rollup": "0.3.15",
+    "@web/test-runner": "0.13.27",
+    "bunzee": "^0.0.1",
+    "chokidar": "3.5.3",
+    "dprint": "0.24.1",
+    "esbuild": "0.14.27",
+    "esbuild-register": "^3.3.2",
+    "eslint": "8.12.0",
+    "eslint-config-html-jsx": "1.0.0",
+    "eslint-plugin-import": "2.25.4",
+    "husky": "7.0.4",
+    "jest": "27.5.1",
+    "jest-browser-globals": "25.1.0-beta",
+    "onchange": "7.1.0",
     "prettier": "^2.5.1",
-    "rimraf": "^3.0.2",
-    "terser": "^5.10.0",
-    "ts-node": "^10.4.0",
-    "typescript": "^4.5.4",
-    "vite": "^2.7.7"
+    "pull-configs": "^0.2.0",
+    "rimraf": "3.0.2",
+    "swcno": "0.1.1",
+    "terser": "5.12.1",
+    "ts-jest": "27.1.4",
+    "ts-node": "10.7.0",
+    "typescript": "4.6.3",
+    "vite": "^2.8.6",
+    "vite-open": "^1.4.2",
+    "vite-web-test-runner-plugin": "0.1.0"
   },
   "dependencies": {
-    "csstype": "^3.0.10"
-  }
+    "csstype": "^3.0.11"
+  },
+  "trustedDependencies": [
+    "@stagas/jest-node-exports-resolver",
+    "bunzee",
+    "decarg",
+    "pull-configs",
+    "vite-open"
+  ]
 }

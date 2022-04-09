@@ -66,11 +66,11 @@ export interface SVGAttributes<T> extends DOMAttributes<T> {
   lang?: string
   /**
    * A space-separated list of the part names of the element. Part names allows CSS to select and style specific elements in a shadow tree via the ::part pseudo-element.
-   *  */
+   */
   part?: string
   /**
    * An integer attribute indicating if the element can take input focus (is focusable), if it should participate to sequential keyboard navigation, and if so, at what position. It can take several values: a negative value means that the element should be focusable, but should not be reachable via sequential keyboard navigation; 0 means that the element should be focusable and reachable via sequential keyboard navigation, but its relative order is defined by the platform convention; a positive value means that the element should be focusable and reachable via sequential keyboard navigation; the order in which the elements are focused is the increasing value of the tabindex. If several elements share the same tabindex, their relative order follows their relative positions in the document.
-   *  */
+   */
   tabindex?: number | string
 }
 interface StylableSVGAttributes {
@@ -213,14 +213,26 @@ interface PresentationSVGAttributes {
   'word-spacing'?: number | string
   'writing-mode'?: 'lr-tb' | 'rl-tb' | 'tb-rl' | 'lr' | 'rl' | 'tb' | 'inherit'
 }
-interface AnimationElementSVGAttributes<T> extends SVGAttributes<T>, ExternalResourceSVGAttributes, ConditionalProcessingSVGAttributes {}
-interface ContainerElementSVGAttributes<T>
-  extends SVGAttributes<T>,
-    Pick<
-      PresentationSVGAttributes,
-      'clip-path' | 'mask' | 'cursor' | 'opacity' | 'filter' | 'enable-background' | 'color-interpolation' | 'color-rendering'
-    > {}
-interface FilterPrimitiveElementSVGAttributes<T> extends SVGAttributes<T>, Pick<PresentationSVGAttributes, 'color-interpolation-filters'> {
+interface AnimationElementSVGAttributes<T>
+  extends SVGAttributes<T>, ExternalResourceSVGAttributes, ConditionalProcessingSVGAttributes
+{}
+interface ContainerElementSVGAttributes<T> extends
+  SVGAttributes<T>,
+  Pick<
+    PresentationSVGAttributes,
+    | 'clip-path'
+    | 'mask'
+    | 'cursor'
+    | 'opacity'
+    | 'filter'
+    | 'enable-background'
+    | 'color-interpolation'
+    | 'color-rendering'
+  >
+{}
+interface FilterPrimitiveElementSVGAttributes<T>
+  extends SVGAttributes<T>, Pick<PresentationSVGAttributes, 'color-interpolation-filters'>
+{
   x?: number | string
   y?: number | string
   width?: number | string
@@ -238,155 +250,193 @@ interface FitToViewBoxSVGAttributes {
   viewBox?: string
   preserveAspectRatio?: SVGPreserveAspectRatio
 }
-interface GradientElementSVGAttributes<T> extends SVGAttributes<T>, ExternalResourceSVGAttributes, StylableSVGAttributes {
+interface GradientElementSVGAttributes<T>
+  extends SVGAttributes<T>, ExternalResourceSVGAttributes, StylableSVGAttributes
+{
   gradientUnits?: SVGUnits
   gradientTransform?: string
   spreadMethod?: 'pad' | 'reflect' | 'repeat'
 }
-interface GraphicsElementSVGAttributes<T>
-  extends SVGAttributes<T>,
-    Pick<
-      PresentationSVGAttributes,
-      'clip-rule' | 'mask' | 'pointer-events' | 'cursor' | 'opacity' | 'filter' | 'display' | 'visibility' | 'color-interpolation' | 'color-rendering'
-    > {}
+interface GraphicsElementSVGAttributes<T> extends
+  SVGAttributes<T>,
+  Pick<
+    PresentationSVGAttributes,
+    | 'clip-rule'
+    | 'mask'
+    | 'pointer-events'
+    | 'cursor'
+    | 'opacity'
+    | 'filter'
+    | 'display'
+    | 'visibility'
+    | 'color-interpolation'
+    | 'color-rendering'
+  >
+{}
 interface LightSourceElementSVGAttributes<T> extends SVGAttributes<T> {}
 interface NewViewportSVGAttributes<T> extends SVGAttributes<T>, Pick<PresentationSVGAttributes, 'overflow' | 'clip'> {
   viewBox?: string
 }
-interface ShapeElementSVGAttributes<T>
-  extends SVGAttributes<T>,
-    Pick<
-      PresentationSVGAttributes,
-      | 'color'
-      | 'fill-opacity'
-      | 'fill-rule'
-      | 'fill'
-      | 'shape-rendering'
-      | 'stroke-dasharray'
-      | 'stroke-dashoffset'
-      | 'stroke-linecap'
-      | 'stroke-linejoin'
-      | 'stroke-miterlimit'
-      | 'stroke-opacity'
-      | 'stroke-width'
-      | 'stroke'
-    > {}
-interface TextContentElementSVGAttributes<T>
-  extends SVGAttributes<T>,
-    Pick<
-      PresentationSVGAttributes,
-      | 'color'
-      | 'direction'
-      | 'dominant-baseline'
-      | 'fill-opacity'
-      | 'fill-rule'
-      | 'fill'
-      | 'font-family'
-      | 'font-size-adjust'
-      | 'font-size'
-      | 'font-stretch'
-      | 'font-style'
-      | 'font-variant'
-      | 'font-weight'
-      | 'glyph-orientation-horizontal'
-      | 'glyph-orientation-vertical'
-      | 'kerning'
-      | 'letter-spacing'
-      | 'stroke-dasharray'
-      | 'stroke-dashoffset'
-      | 'stroke-linecap'
-      | 'stroke-linejoin'
-      | 'stroke-miterlimit'
-      | 'stroke-opacity'
-      | 'stroke-width'
-      | 'stroke'
-      | 'text-anchor'
-      | 'text-decoration'
-      | 'unicode-bidi'
-      | 'word-spacing'
-    > {}
+interface ShapeElementSVGAttributes<T> extends
+  SVGAttributes<T>,
+  Pick<
+    PresentationSVGAttributes,
+    | 'color'
+    | 'fill-opacity'
+    | 'fill-rule'
+    | 'fill'
+    | 'shape-rendering'
+    | 'stroke-dasharray'
+    | 'stroke-dashoffset'
+    | 'stroke-linecap'
+    | 'stroke-linejoin'
+    | 'stroke-miterlimit'
+    | 'stroke-opacity'
+    | 'stroke-width'
+    | 'stroke'
+  >
+{}
+interface TextContentElementSVGAttributes<T> extends
+  SVGAttributes<T>,
+  Pick<
+    PresentationSVGAttributes,
+    | 'color'
+    | 'direction'
+    | 'dominant-baseline'
+    | 'fill-opacity'
+    | 'fill-rule'
+    | 'fill'
+    | 'font-family'
+    | 'font-size-adjust'
+    | 'font-size'
+    | 'font-stretch'
+    | 'font-style'
+    | 'font-variant'
+    | 'font-weight'
+    | 'glyph-orientation-horizontal'
+    | 'glyph-orientation-vertical'
+    | 'kerning'
+    | 'letter-spacing'
+    | 'stroke-dasharray'
+    | 'stroke-dashoffset'
+    | 'stroke-linecap'
+    | 'stroke-linejoin'
+    | 'stroke-miterlimit'
+    | 'stroke-opacity'
+    | 'stroke-width'
+    | 'stroke'
+    | 'text-anchor'
+    | 'text-decoration'
+    | 'unicode-bidi'
+    | 'word-spacing'
+  >
+{}
 interface ZoomAndPanSVGAttributes {
   zoomAndPan?: 'disable' | 'magnify'
 }
 interface AnimateSVGAttributes<T>
-  extends AnimationElementSVGAttributes<T>,
+  extends
+    AnimationElementSVGAttributes<T>,
     AnimationAttributeTargetSVGAttributes,
     AnimationTimingSVGAttributes,
     AnimationValueSVGAttributes,
     AnimationAdditionSVGAttributes,
-    Pick<PresentationSVGAttributes, 'color-interpolation' | 'color-rendering'> {}
+    Pick<PresentationSVGAttributes, 'color-interpolation' | 'color-rendering'>
+{}
 interface AnimateMotionSVGAttributes<T>
-  extends AnimationElementSVGAttributes<T>,
+  extends
+    AnimationElementSVGAttributes<T>,
     AnimationTimingSVGAttributes,
     AnimationValueSVGAttributes,
-    AnimationAdditionSVGAttributes {
+    AnimationAdditionSVGAttributes
+{
   path?: string
   keyPoints?: string
   rotate?: number | string | 'auto' | 'auto-reverse'
   origin?: 'default'
 }
 interface AnimateTransformSVGAttributes<T>
-  extends AnimationElementSVGAttributes<T>,
+  extends
+    AnimationElementSVGAttributes<T>,
     AnimationAttributeTargetSVGAttributes,
     AnimationTimingSVGAttributes,
     AnimationValueSVGAttributes,
-    AnimationAdditionSVGAttributes {
+    AnimationAdditionSVGAttributes
+{
   type?: 'translate' | 'scale' | 'rotate' | 'skewX' | 'skewY'
 }
 interface CircleSVGAttributes<T>
-  extends GraphicsElementSVGAttributes<T>,
+  extends
+    GraphicsElementSVGAttributes<T>,
     ShapeElementSVGAttributes<T>,
     ConditionalProcessingSVGAttributes,
     StylableSVGAttributes,
-    TransformableSVGAttributes {
+    TransformableSVGAttributes
+{
   cx?: number | string
   cy?: number | string
   r?: number | string
 }
 interface ClipPathSVGAttributes<T>
-  extends SVGAttributes<T>,
+  extends
+    SVGAttributes<T>,
     ConditionalProcessingSVGAttributes,
     ExternalResourceSVGAttributes,
     StylableSVGAttributes,
     TransformableSVGAttributes,
-    Pick<PresentationSVGAttributes, 'clip-path'> {
+    Pick<PresentationSVGAttributes, 'clip-path'>
+{
   clipPathUnits?: SVGUnits
 }
 interface DefsSVGAttributes<T>
-  extends ContainerElementSVGAttributes<T>,
+  extends
+    ContainerElementSVGAttributes<T>,
     ConditionalProcessingSVGAttributes,
     ExternalResourceSVGAttributes,
     StylableSVGAttributes,
-    TransformableSVGAttributes {}
+    TransformableSVGAttributes
+{}
 interface DescSVGAttributes<T> extends SVGAttributes<T>, StylableSVGAttributes {}
 interface EllipseSVGAttributes<T>
-  extends GraphicsElementSVGAttributes<T>,
+  extends
+    GraphicsElementSVGAttributes<T>,
     ShapeElementSVGAttributes<T>,
     ConditionalProcessingSVGAttributes,
     ExternalResourceSVGAttributes,
     StylableSVGAttributes,
-    TransformableSVGAttributes {
+    TransformableSVGAttributes
+{
   cx?: number | string
   cy?: number | string
   rx?: number | string
   ry?: number | string
 }
-interface FeBlendSVGAttributes<T> extends FilterPrimitiveElementSVGAttributes<T>, DoubleInputFilterSVGAttributes, StylableSVGAttributes {
+interface FeBlendSVGAttributes<T>
+  extends FilterPrimitiveElementSVGAttributes<T>, DoubleInputFilterSVGAttributes, StylableSVGAttributes
+{
   mode?: 'normal' | 'multiply' | 'screen' | 'darken' | 'lighten'
 }
-interface FeColorMatrixSVGAttributes<T> extends FilterPrimitiveElementSVGAttributes<T>, SingleInputFilterSVGAttributes, StylableSVGAttributes {
+interface FeColorMatrixSVGAttributes<T>
+  extends FilterPrimitiveElementSVGAttributes<T>, SingleInputFilterSVGAttributes, StylableSVGAttributes
+{
   type?: 'matrix' | 'saturate' | 'hueRotate' | 'luminanceToAlpha'
   values?: string
 }
-interface FeComponentTransferSVGAttributes<T> extends FilterPrimitiveElementSVGAttributes<T>, SingleInputFilterSVGAttributes, StylableSVGAttributes {}
-interface FeCompositeSVGAttributes<T> extends FilterPrimitiveElementSVGAttributes<T>, DoubleInputFilterSVGAttributes, StylableSVGAttributes {
+interface FeComponentTransferSVGAttributes<T>
+  extends FilterPrimitiveElementSVGAttributes<T>, SingleInputFilterSVGAttributes, StylableSVGAttributes
+{}
+interface FeCompositeSVGAttributes<T>
+  extends FilterPrimitiveElementSVGAttributes<T>, DoubleInputFilterSVGAttributes, StylableSVGAttributes
+{
   operator?: 'over' | 'in' | 'out' | 'atop' | 'xor' | 'arithmetic'
   k1?: number | string
   k2?: number | string
   k3?: number | string
   k4?: number | string
 }
-interface FeConvolveMatrixSVGAttributes<T> extends FilterPrimitiveElementSVGAttributes<T>, SingleInputFilterSVGAttributes, StylableSVGAttributes {
+interface FeConvolveMatrixSVGAttributes<T>
+  extends FilterPrimitiveElementSVGAttributes<T>, SingleInputFilterSVGAttributes, StylableSVGAttributes
+{
   order?: number | string
   kernelMatrix?: string
   divisor?: number | string
@@ -398,15 +448,19 @@ interface FeConvolveMatrixSVGAttributes<T> extends FilterPrimitiveElementSVGAttr
   preserveAlpha?: 'true' | 'false'
 }
 interface FeDiffuseLightingSVGAttributes<T>
-  extends FilterPrimitiveElementSVGAttributes<T>,
+  extends
+    FilterPrimitiveElementSVGAttributes<T>,
     SingleInputFilterSVGAttributes,
     StylableSVGAttributes,
-    Pick<PresentationSVGAttributes, 'color' | 'lighting-color'> {
+    Pick<PresentationSVGAttributes, 'color' | 'lighting-color'>
+{
   surfaceScale?: number | string
   diffuseConstant?: number | string
   kernelUnitLength?: number | string
 }
-interface FeDisplacementMapSVGAttributes<T> extends FilterPrimitiveElementSVGAttributes<T>, DoubleInputFilterSVGAttributes, StylableSVGAttributes {
+interface FeDisplacementMapSVGAttributes<T>
+  extends FilterPrimitiveElementSVGAttributes<T>, DoubleInputFilterSVGAttributes, StylableSVGAttributes
+{
   scale?: number | string
   xChannelSelector?: 'R' | 'G' | 'B' | 'A'
   yChannelSelector?: 'R' | 'G' | 'B' | 'A'
@@ -416,9 +470,11 @@ interface FeDistantLightSVGAttributes<T> extends LightSourceElementSVGAttributes
   elevation?: number | string
 }
 interface FeFloodSVGAttributes<T>
-  extends FilterPrimitiveElementSVGAttributes<T>,
+  extends
+    FilterPrimitiveElementSVGAttributes<T>,
     StylableSVGAttributes,
-    Pick<PresentationSVGAttributes, 'color' | 'flood-color' | 'flood-opacity'> {}
+    Pick<PresentationSVGAttributes, 'color' | 'flood-color' | 'flood-opacity'>
+{}
 interface FeFuncSVGAttributes<T> extends SVGAttributes<T> {
   type?: 'identity' | 'table' | 'discrete' | 'linear' | 'gamma'
   tableValues?: string
@@ -428,19 +484,27 @@ interface FeFuncSVGAttributes<T> extends SVGAttributes<T> {
   exponent?: number | string
   offset?: number | string
 }
-interface FeGaussianBlurSVGAttributes<T> extends FilterPrimitiveElementSVGAttributes<T>, SingleInputFilterSVGAttributes, StylableSVGAttributes {
+interface FeGaussianBlurSVGAttributes<T>
+  extends FilterPrimitiveElementSVGAttributes<T>, SingleInputFilterSVGAttributes, StylableSVGAttributes
+{
   stdDeviation?: number | string
 }
-interface FeImageSVGAttributes<T> extends FilterPrimitiveElementSVGAttributes<T>, ExternalResourceSVGAttributes, StylableSVGAttributes {
+interface FeImageSVGAttributes<T>
+  extends FilterPrimitiveElementSVGAttributes<T>, ExternalResourceSVGAttributes, StylableSVGAttributes
+{
   preserveAspectRatio: SVGPreserveAspectRatio
 }
 interface FeMergeSVGAttributes<T> extends FilterPrimitiveElementSVGAttributes<T>, StylableSVGAttributes {}
 interface FeMergeNodeSVGAttributes<T> extends SVGAttributes<T>, SingleInputFilterSVGAttributes {}
-interface FeMorphologySVGAttributes<T> extends FilterPrimitiveElementSVGAttributes<T>, SingleInputFilterSVGAttributes, StylableSVGAttributes {
+interface FeMorphologySVGAttributes<T>
+  extends FilterPrimitiveElementSVGAttributes<T>, SingleInputFilterSVGAttributes, StylableSVGAttributes
+{
   operator?: 'erode' | 'dilate'
   radius?: number | string
 }
-interface FeOffsetSVGAttributes<T> extends FilterPrimitiveElementSVGAttributes<T>, SingleInputFilterSVGAttributes, StylableSVGAttributes {
+interface FeOffsetSVGAttributes<T>
+  extends FilterPrimitiveElementSVGAttributes<T>, SingleInputFilterSVGAttributes, StylableSVGAttributes
+{
   dx?: number | string
   dy?: number | string
 }
@@ -450,10 +514,12 @@ interface FePointLightSVGAttributes<T> extends LightSourceElementSVGAttributes<T
   z?: number | string
 }
 interface FeSpecularLightingSVGAttributes<T>
-  extends FilterPrimitiveElementSVGAttributes<T>,
+  extends
+    FilterPrimitiveElementSVGAttributes<T>,
     SingleInputFilterSVGAttributes,
     StylableSVGAttributes,
-    Pick<PresentationSVGAttributes, 'color' | 'lighting-color'> {
+    Pick<PresentationSVGAttributes, 'color' | 'lighting-color'>
+{
   surfaceScale?: string
   specularConstant?: string
   specularExponent?: string
@@ -469,7 +535,9 @@ interface FeSpotLightSVGAttributes<T> extends LightSourceElementSVGAttributes<T>
   specularExponent?: number | string
   limitingConeAngle?: number | string
 }
-interface FeTileSVGAttributes<T> extends FilterPrimitiveElementSVGAttributes<T>, SingleInputFilterSVGAttributes, StylableSVGAttributes {}
+interface FeTileSVGAttributes<T>
+  extends FilterPrimitiveElementSVGAttributes<T>, SingleInputFilterSVGAttributes, StylableSVGAttributes
+{}
 interface FeTurbulanceSVGAttributes<T> extends FilterPrimitiveElementSVGAttributes<T>, StylableSVGAttributes {
   baseFrequency?: number | string
   numOctaves?: number | string
@@ -487,31 +555,37 @@ interface FilterSVGAttributes<T> extends SVGAttributes<T>, ExternalResourceSVGAt
   filterRes?: number | string
 }
 interface ForeignObjectSVGAttributes<T>
-  extends NewViewportSVGAttributes<T>,
+  extends
+    NewViewportSVGAttributes<T>,
     ConditionalProcessingSVGAttributes,
     ExternalResourceSVGAttributes,
     StylableSVGAttributes,
     TransformableSVGAttributes,
-    Pick<PresentationSVGAttributes, 'display' | 'visibility'> {
+    Pick<PresentationSVGAttributes, 'display' | 'visibility'>
+{
   x?: number | string
   y?: number | string
   width?: number | string
   height?: number | string
 }
 interface GSVGAttributes<T>
-  extends ContainerElementSVGAttributes<T>,
+  extends
+    ContainerElementSVGAttributes<T>,
     ConditionalProcessingSVGAttributes,
     ExternalResourceSVGAttributes,
     StylableSVGAttributes,
     TransformableSVGAttributes,
-    Pick<PresentationSVGAttributes, 'display' | 'visibility'> {}
+    Pick<PresentationSVGAttributes, 'display' | 'visibility'>
+{}
 interface ImageSVGAttributes<T>
-  extends NewViewportSVGAttributes<T>,
+  extends
+    NewViewportSVGAttributes<T>,
     GraphicsElementSVGAttributes<T>,
     ConditionalProcessingSVGAttributes,
     StylableSVGAttributes,
     TransformableSVGAttributes,
-    Pick<PresentationSVGAttributes, 'color-profile' | 'image-rendering'> {
+    Pick<PresentationSVGAttributes, 'color-profile' | 'image-rendering'>
+{
   x?: number | string
   y?: number | string
   width?: number | string
@@ -519,13 +593,15 @@ interface ImageSVGAttributes<T>
   preserveAspectRatio?: ImagePreserveAspectRatio
 }
 interface LineSVGAttributes<T>
-  extends GraphicsElementSVGAttributes<T>,
+  extends
+    GraphicsElementSVGAttributes<T>,
     ShapeElementSVGAttributes<T>,
     ConditionalProcessingSVGAttributes,
     ExternalResourceSVGAttributes,
     StylableSVGAttributes,
     TransformableSVGAttributes,
-    Pick<PresentationSVGAttributes, 'marker-start' | 'marker-mid' | 'marker-end'> {
+    Pick<PresentationSVGAttributes, 'marker-start' | 'marker-mid' | 'marker-end'>
+{
   x1?: number | string
   y1?: number | string
   x2?: number | string
@@ -538,11 +614,13 @@ interface LinearGradientSVGAttributes<T> extends GradientElementSVGAttributes<T>
   y2?: number | string
 }
 interface MarkerSVGAttributes<T>
-  extends ContainerElementSVGAttributes<T>,
+  extends
+    ContainerElementSVGAttributes<T>,
     ExternalResourceSVGAttributes,
     StylableSVGAttributes,
     FitToViewBoxSVGAttributes,
-    Pick<PresentationSVGAttributes, 'overflow' | 'clip'> {
+    Pick<PresentationSVGAttributes, 'overflow' | 'clip'>
+{
   markerUnits?: 'strokeWidth' | 'userSpaceOnUse'
   refX?: number | string
   refY?: number | string
@@ -551,10 +629,12 @@ interface MarkerSVGAttributes<T>
   orient?: string
 }
 interface MaskSVGAttributes<T>
-  extends Omit<ContainerElementSVGAttributes<T>, 'opacity' | 'filter'>,
+  extends
+    Omit<ContainerElementSVGAttributes<T>, 'opacity' | 'filter'>,
     ConditionalProcessingSVGAttributes,
     ExternalResourceSVGAttributes,
-    StylableSVGAttributes {
+    StylableSVGAttributes
+{
   maskUnits?: SVGUnits
   maskContentUnits?: SVGUnits
   x?: number | string
@@ -564,23 +644,27 @@ interface MaskSVGAttributes<T>
 }
 interface MetadataSVGAttributes<T> extends SVGAttributes<T> {}
 interface PathSVGAttributes<T>
-  extends GraphicsElementSVGAttributes<T>,
+  extends
+    GraphicsElementSVGAttributes<T>,
     ShapeElementSVGAttributes<T>,
     ConditionalProcessingSVGAttributes,
     ExternalResourceSVGAttributes,
     StylableSVGAttributes,
     TransformableSVGAttributes,
-    Pick<PresentationSVGAttributes, 'marker-start' | 'marker-mid' | 'marker-end'> {
+    Pick<PresentationSVGAttributes, 'marker-start' | 'marker-mid' | 'marker-end'>
+{
   d?: string
   pathLength?: number | string
 }
 interface PatternSVGAttributes<T>
-  extends ContainerElementSVGAttributes<T>,
+  extends
+    ContainerElementSVGAttributes<T>,
     ConditionalProcessingSVGAttributes,
     ExternalResourceSVGAttributes,
     StylableSVGAttributes,
     FitToViewBoxSVGAttributes,
-    Pick<PresentationSVGAttributes, 'overflow' | 'clip'> {
+    Pick<PresentationSVGAttributes, 'overflow' | 'clip'>
+{
   x?: number | string
   y?: number | string
   width?: number | string
@@ -590,23 +674,27 @@ interface PatternSVGAttributes<T>
   patternTransform?: string
 }
 interface PolygonSVGAttributes<T>
-  extends GraphicsElementSVGAttributes<T>,
+  extends
+    GraphicsElementSVGAttributes<T>,
     ShapeElementSVGAttributes<T>,
     ConditionalProcessingSVGAttributes,
     ExternalResourceSVGAttributes,
     StylableSVGAttributes,
     TransformableSVGAttributes,
-    Pick<PresentationSVGAttributes, 'marker-start' | 'marker-mid' | 'marker-end'> {
+    Pick<PresentationSVGAttributes, 'marker-start' | 'marker-mid' | 'marker-end'>
+{
   points?: string
 }
 interface PolylineSVGAttributes<T>
-  extends GraphicsElementSVGAttributes<T>,
+  extends
+    GraphicsElementSVGAttributes<T>,
     ShapeElementSVGAttributes<T>,
     ConditionalProcessingSVGAttributes,
     ExternalResourceSVGAttributes,
     StylableSVGAttributes,
     TransformableSVGAttributes,
-    Pick<PresentationSVGAttributes, 'marker-start' | 'marker-mid' | 'marker-end'> {
+    Pick<PresentationSVGAttributes, 'marker-start' | 'marker-mid' | 'marker-end'>
+{
   points?: string
 }
 interface RadialGradientSVGAttributes<T> extends GradientElementSVGAttributes<T> {
@@ -617,12 +705,14 @@ interface RadialGradientSVGAttributes<T> extends GradientElementSVGAttributes<T>
   fy?: number | string
 }
 interface RectSVGAttributes<T>
-  extends GraphicsElementSVGAttributes<T>,
+  extends
+    GraphicsElementSVGAttributes<T>,
     ShapeElementSVGAttributes<T>,
     ConditionalProcessingSVGAttributes,
     ExternalResourceSVGAttributes,
     StylableSVGAttributes,
-    TransformableSVGAttributes {
+    TransformableSVGAttributes
+{
   x?: number | string
   y?: number | string
   width?: number | string
@@ -631,20 +721,24 @@ interface RectSVGAttributes<T>
   ry?: number | string
 }
 interface StopSVGAttributes<T>
-  extends SVGAttributes<T>,
+  extends
+    SVGAttributes<T>,
     StylableSVGAttributes,
-    Pick<PresentationSVGAttributes, 'color' | 'stop-color' | 'stop-opacity'> {
+    Pick<PresentationSVGAttributes, 'color' | 'stop-color' | 'stop-opacity'>
+{
   offset?: number | string
 }
 interface SvgSVGAttributes<T>
-  extends ContainerElementSVGAttributes<T>,
+  extends
+    ContainerElementSVGAttributes<T>,
     NewViewportSVGAttributes<T>,
     ConditionalProcessingSVGAttributes,
     ExternalResourceSVGAttributes,
     StylableSVGAttributes,
     FitToViewBoxSVGAttributes,
     ZoomAndPanSVGAttributes,
-    PresentationSVGAttributes {
+    PresentationSVGAttributes
+{
   version?: string
   'base-profile'?: string
   x?: number | string
@@ -656,26 +750,32 @@ interface SvgSVGAttributes<T>
   xmlns?: string
 }
 interface SwitchSVGAttributes<T>
-  extends ContainerElementSVGAttributes<T>,
+  extends
+    ContainerElementSVGAttributes<T>,
     ConditionalProcessingSVGAttributes,
     ExternalResourceSVGAttributes,
     StylableSVGAttributes,
     TransformableSVGAttributes,
-    Pick<PresentationSVGAttributes, 'display' | 'visibility'> {}
+    Pick<PresentationSVGAttributes, 'display' | 'visibility'>
+{}
 interface SymbolSVGAttributes<T>
-  extends ContainerElementSVGAttributes<T>,
+  extends
+    ContainerElementSVGAttributes<T>,
     NewViewportSVGAttributes<T>,
     ExternalResourceSVGAttributes,
     StylableSVGAttributes,
-    FitToViewBoxSVGAttributes {}
+    FitToViewBoxSVGAttributes
+{}
 interface TextSVGAttributes<T>
-  extends TextContentElementSVGAttributes<T>,
+  extends
+    TextContentElementSVGAttributes<T>,
     GraphicsElementSVGAttributes<T>,
     ConditionalProcessingSVGAttributes,
     ExternalResourceSVGAttributes,
     StylableSVGAttributes,
     TransformableSVGAttributes,
-    Pick<PresentationSVGAttributes, 'writing-mode' | 'text-rendering'> {
+    Pick<PresentationSVGAttributes, 'writing-mode' | 'text-rendering'>
+{
   x?: number | string
   y?: number | string
   dx?: number | string
@@ -685,21 +785,25 @@ interface TextSVGAttributes<T>
   lengthAdjust?: 'spacing' | 'spacingAndGlyphs'
 }
 interface TextPathSVGAttributes<T>
-  extends TextContentElementSVGAttributes<T>,
+  extends
+    TextContentElementSVGAttributes<T>,
     ConditionalProcessingSVGAttributes,
     ExternalResourceSVGAttributes,
     StylableSVGAttributes,
-    Pick<PresentationSVGAttributes, 'alignment-baseline' | 'baseline-shift' | 'display' | 'visibility'> {
+    Pick<PresentationSVGAttributes, 'alignment-baseline' | 'baseline-shift' | 'display' | 'visibility'>
+{
   startOffset?: number | string
   method?: 'align' | 'stretch'
   spacing?: 'auto' | 'exact'
 }
 interface TSpanSVGAttributes<T>
-  extends TextContentElementSVGAttributes<T>,
+  extends
+    TextContentElementSVGAttributes<T>,
     ConditionalProcessingSVGAttributes,
     ExternalResourceSVGAttributes,
     StylableSVGAttributes,
-    Pick<PresentationSVGAttributes, 'alignment-baseline' | 'baseline-shift' | 'display' | 'visibility'> {
+    Pick<PresentationSVGAttributes, 'alignment-baseline' | 'baseline-shift' | 'display' | 'visibility'>
+{
   x?: number | string
   y?: number | string
   dx?: number | string
@@ -709,17 +813,21 @@ interface TSpanSVGAttributes<T>
   lengthAdjust?: 'spacing' | 'spacingAndGlyphs'
 }
 interface UseSVGAttributes<T>
-  extends GraphicsElementSVGAttributes<T>,
+  extends
+    GraphicsElementSVGAttributes<T>,
     ConditionalProcessingSVGAttributes,
     ExternalResourceSVGAttributes,
     StylableSVGAttributes,
-    TransformableSVGAttributes {
+    TransformableSVGAttributes
+{
   x?: number | string
   y?: number | string
   width?: number | string
   height?: number | string
 }
-interface ViewSVGAttributes<T> extends SVGAttributes<T>, ExternalResourceSVGAttributes, FitToViewBoxSVGAttributes, ZoomAndPanSVGAttributes {
+interface ViewSVGAttributes<T>
+  extends SVGAttributes<T>, ExternalResourceSVGAttributes, FitToViewBoxSVGAttributes, ZoomAndPanSVGAttributes
+{
   viewTarget?: string
 }
 export interface SVGElements {

@@ -1,19 +1,399 @@
-import { StandardProperties as CSSProperties } from 'csstype'
-import { AriaAttributes } from './aria'
-import {
-  DOMAttributes,
-  EventHandler,
-  HTMLAutocapitalize,
-  HTMLAutocomplete,
-  HTMLCrossorigin,
-  HTMLDir,
-  HTMLFormEncType,
-  HTMLFormMethod,
-  HTMLIframeSandbox,
-  HTMLLinkAs,
-  HTMLReferrerPolicy,
-} from './dom'
-export type HTMLRole =
+import { StandardProperties } from 'csstype'
+
+interface AriaAttributes {
+  /** Identifies the currently active element when DOM focus is on a composite widget, textbox, group, or application. */
+  'aria-activedescendant'?: string
+  /** Indicates whether assistive technologies will present all, or only parts of, the changed region based on the change notifications defined by the aria-relevant attribute. */
+  'aria-atomic'?: boolean | 'false' | 'true'
+  /**
+   * Indicates whether inputting text could trigger display of one or more predictions of the user's intended value for an input and specifies how predictions would be
+   * presented if they are made.
+   */
+  'aria-autocomplete'?: 'none' | 'inline' | 'list' | 'both'
+  /** Indicates an element is being modified and that assistive technologies MAY want to wait until the modifications are complete before exposing them to the user. */
+  'aria-busy'?: boolean | 'false' | 'true'
+  /**
+   * Indicates the current "checked" state of checkboxes, radio buttons, and other widgets.
+   * @see aria-pressed @see aria-selected.
+   */
+  'aria-checked'?: boolean | 'false' | 'mixed' | 'true'
+  /**
+   * Defines the total number of columns in a table, grid, or treegrid.
+   * @see aria-colindex.
+   */
+  'aria-colcount'?: number
+  /**
+   * Defines an element's column index or position with respect to the total number of columns within a table, grid, or treegrid.
+   * @see aria-colcount @see aria-colspan.
+   */
+  'aria-colindex'?: number
+  /**
+   * Defines the number of columns spanned by a cell or gridcell within a table, grid, or treegrid.
+   * @see aria-colindex @see aria-rowspan.
+   */
+  'aria-colspan'?: number
+  /**
+   * Identifies the element (or elements) whose contents or presence are controlled by the current element.
+   * @see aria-owns.
+   */
+  'aria-controls'?: string
+  /** Indicates the element that represents the current item within a container or set of related elements. */
+  'aria-current'?: boolean | 'false' | 'true' | 'page' | 'step' | 'location' | 'date' | 'time'
+  /**
+   * Identifies the element (or elements) that describes the object.
+   * @see aria-labelledby
+   */
+  'aria-describedby'?: string
+  /**
+   * Identifies the element that provides a detailed, extended description for the object.
+   * @see aria-describedby.
+   */
+  'aria-details'?: string
+  /**
+   * Indicates that the element is perceivable but disabled, so it is not editable or otherwise operable.
+   * @see aria-hidden @see aria-readonly.
+   */
+  'aria-disabled'?: boolean | 'false' | 'true'
+  /**
+   * Indicates what functions can be performed when a dragged object is released on the drop target.
+   * @deprecated in ARIA 1.1
+   */
+  'aria-dropeffect'?: 'none' | 'copy' | 'execute' | 'link' | 'move' | 'popup'
+  /**
+   * Identifies the element that provides an error message for the object.
+   * @see aria-invalid @see aria-describedby.
+   */
+  'aria-errormessage'?: string
+  /** Indicates whether the element, or another grouping element it controls, is currently expanded or collapsed. */
+  'aria-expanded'?: boolean | 'false' | 'true'
+  /**
+   * Identifies the next element (or elements) in an alternate reading order of content which, at the user's discretion,
+   * allows assistive technology to override the general default of reading in document source order.
+   */
+  'aria-flowto'?: string
+  /**
+   * Indicates an element's "grabbed" state in a drag-and-drop operation.
+   * @deprecated in ARIA 1.1
+   */
+  'aria-grabbed'?: boolean | 'false' | 'true'
+  /** Indicates the availability and type of interactive popup element, such as menu or dialog, that can be triggered by an element. */
+  'aria-haspopup'?: boolean | 'false' | 'true' | 'menu' | 'listbox' | 'tree' | 'grid' | 'dialog'
+  /**
+   * Indicates whether the element is exposed to an accessibility API.
+   * @see aria-disabled.
+   */
+  'aria-hidden'?: boolean | 'false' | 'true'
+  /**
+   * Indicates the entered value does not conform to the format expected by the application.
+   * @see aria-errormessage.
+   */
+  'aria-invalid'?: boolean | 'false' | 'true' | 'grammar' | 'spelling'
+  /** Indicates keyboard shortcuts that an author has implemented to activate or give focus to an element. */
+  'aria-keyshortcuts'?: string
+  /**
+   * Defines a string value that labels the current element.
+   * @see aria-labelledby.
+   */
+  'aria-label'?: string
+  /**
+   * Identifies the element (or elements) that labels the current element.
+   * @see aria-describedby.
+   */
+  'aria-labelledby'?: string
+  /** Defines the hierarchical level of an element within a structure. */
+  'aria-level'?: number
+  /** Indicates that an element will be updated, and describes the types of updates the user agents, assistive technologies, and user can expect from the live region. */
+  'aria-live'?: 'off' | 'assertive' | 'polite'
+  /** Indicates whether an element is modal when displayed. */
+  'aria-modal'?: boolean | 'false' | 'true'
+  /** Indicates whether a text box accepts multiple lines of input or only a single line. */
+  'aria-multiline'?: boolean | 'false' | 'true'
+  /** Indicates that the user may select more than one item from the current selectable descendants. */
+  'aria-multiselectable'?: boolean | 'false' | 'true'
+  /** Indicates whether the element's orientation is horizontal, vertical, or unknown/ambiguous. */
+  'aria-orientation'?: 'horizontal' | 'vertical'
+  /**
+   * Identifies an element (or elements) in order to define a visual, functional, or contextual parent/child relationship
+   * between DOM elements where the DOM hierarchy cannot be used to represent the relationship.
+   * @see aria-controls.
+   */
+  'aria-owns'?: string
+  /**
+   * Defines a short hint (a word or short phrase) intended to aid the user with data entry when the control has no value.
+   * A hint could be a sample value or a brief description of the expected format.
+   */
+  'aria-placeholder'?: string
+  /**
+   * Defines an element's number or position in the current set of listitems or treeitems. Not required if all elements in the set are present in the DOM.
+   * @see aria-setsize.
+   */
+  'aria-posinset'?: number
+  /**
+   * Indicates the current "pressed" state of toggle buttons.
+   * @see aria-checked @see aria-selected.
+   */
+  'aria-pressed'?: boolean | 'false' | 'mixed' | 'true'
+  /**
+   * Indicates that the element is not editable, but is otherwise operable.
+   * @see aria-disabled.
+   */
+  'aria-readonly'?: boolean | 'false' | 'true'
+  /**
+   * Indicates what notifications the user agent will trigger when the accessibility tree within a live region is modified.
+   * @see aria-atomic.
+   */
+  'aria-relevant'?:
+    | 'additions'
+    | 'additions removals'
+    | 'additions text'
+    | 'all'
+    | 'removals'
+    | 'removals additions'
+    | 'removals text'
+    | 'text'
+    | 'text additions'
+    | 'text removals'
+  /** Indicates that user input is required on the element before a form may be submitted. */
+  'aria-required'?: boolean | 'false' | 'true'
+  /** Defines a human-readable, author-localized description for the role of an element. */
+  'aria-roledescription'?: string
+  /**
+   * Defines the total number of rows in a table, grid, or treegrid.
+   * @see aria-rowindex.
+   */
+  'aria-rowcount'?: number
+  /**
+   * Defines an element's row index or position with respect to the total number of rows within a table, grid, or treegrid.
+   * @see aria-rowcount @see aria-rowspan.
+   */
+  'aria-rowindex'?: number
+  /**
+   * Defines the number of rows spanned by a cell or gridcell within a table, grid, or treegrid.
+   * @see aria-rowindex @see aria-colspan.
+   */
+  'aria-rowspan'?: number
+  /**
+   * Indicates the current "selected" state of various widgets.
+   * @see aria-checked @see aria-pressed.
+   */
+  'aria-selected'?: boolean | 'false' | 'true'
+  /**
+   * Defines the number of items in the current set of listitems or treeitems. Not required if all elements in the set are present in the DOM.
+   * @see aria-posinset.
+   */
+  'aria-setsize'?: number
+  /** Indicates if items in a table or grid are sorted in ascending or descending order. */
+  'aria-sort'?: 'none' | 'ascending' | 'descending' | 'other'
+  /** Defines the maximum allowed value for a range widget. */
+  'aria-valuemax'?: number
+  /** Defines the minimum allowed value for a range widget. */
+  'aria-valuemin'?: number
+  /**
+   * Defines the current value for a range widget.
+   * @see aria-valuetext.
+   */
+  'aria-valuenow'?: number
+  /** Defines the human readable text alternative of aria-valuenow for a range widget. */
+  'aria-valuetext'?: string
+}
+
+interface EventHandler<T, E extends Event> {
+  (
+    e: E & {
+      currentTarget: T
+      target: Element
+    },
+  ): void
+}
+interface DOMAttributes<T> {
+  onabort?: EventHandler<T, Event>
+  onanimationend?: EventHandler<T, AnimationEvent>
+  onanimationiteration?: EventHandler<T, AnimationEvent>
+  onanimationstart?: EventHandler<T, AnimationEvent>
+  onblur?: EventHandler<T, FocusEvent>
+  oncanplay?: EventHandler<T, Event>
+  oncanplaythrough?: EventHandler<T, Event>
+  onchange?: EventHandler<T, Event>
+  onclick?: EventHandler<T, MouseEvent>
+  oncompositionend?: EventHandler<T, CompositionEvent>
+  oncompositionstart?: EventHandler<T, CompositionEvent>
+  oncompositionupdate?: EventHandler<T, CompositionEvent>
+  oncontextmenu?: EventHandler<T, MouseEvent>
+  oncopy?: EventHandler<T, ClipboardEvent>
+  oncut?: EventHandler<T, ClipboardEvent>
+  ondblclick?: EventHandler<T, MouseEvent>
+  ondrag?: EventHandler<T, DragEvent>
+  ondragend?: EventHandler<T, DragEvent>
+  ondragenter?: EventHandler<T, DragEvent>
+  ondragexit?: EventHandler<T, DragEvent>
+  ondragleave?: EventHandler<T, DragEvent>
+  ondragover?: EventHandler<T, DragEvent>
+  ondragstart?: EventHandler<T, DragEvent>
+  ondrop?: EventHandler<T, DragEvent>
+  ondurationchange?: EventHandler<T, Event>
+  onemptied?: EventHandler<T, Event>
+  onencrypted?: EventHandler<T, Event>
+  onended?: EventHandler<T, Event>
+  onerror?: EventHandler<T, Event>
+  onfocus?: EventHandler<T, FocusEvent>
+  ongotpointercapture?: EventHandler<T, PointerEvent>
+  oninput?: EventHandler<T, InputEvent>
+  onkeydown?: EventHandler<T, KeyboardEvent>
+  onkeypress?: EventHandler<T, KeyboardEvent>
+  onkeyup?: EventHandler<T, KeyboardEvent>
+  onload?: EventHandler<T, Event>
+  onloadeddata?: EventHandler<T, Event>
+  onloadedmetadata?: EventHandler<T, Event>
+  onloadstart?: EventHandler<T, Event>
+  onlostpointercapture?: EventHandler<T, PointerEvent>
+  onmousedown?: EventHandler<T, MouseEvent>
+  onmouseenter?: EventHandler<T, MouseEvent>
+  onmouseleave?: EventHandler<T, MouseEvent>
+  onmousemove?: EventHandler<T, MouseEvent>
+  onmouseout?: EventHandler<T, MouseEvent>
+  onmouseover?: EventHandler<T, MouseEvent>
+  onmouseup?: EventHandler<T, MouseEvent>
+  onpaste?: EventHandler<T, ClipboardEvent>
+  onpause?: EventHandler<T, Event>
+  onplay?: EventHandler<T, Event>
+  onplaying?: EventHandler<T, Event>
+  onpointercancel?: EventHandler<T, PointerEvent>
+  onpointerdown?: EventHandler<T, PointerEvent>
+  onpointerenter?: EventHandler<T, PointerEvent>
+  onpointerleave?: EventHandler<T, PointerEvent>
+  onpointermove?: EventHandler<T, PointerEvent>
+  onpointerout?: EventHandler<T, PointerEvent>
+  onpointerover?: EventHandler<T, PointerEvent>
+  onpointerup?: EventHandler<T, PointerEvent>
+  onprogress?: EventHandler<T, Event>
+  onratechange?: EventHandler<T, Event>
+  onreset?: EventHandler<T, Event>
+  onscroll?: EventHandler<T, UIEvent>
+  onseeked?: EventHandler<T, Event>
+  onseeking?: EventHandler<T, Event>
+  onselect?: EventHandler<T, UIEvent>
+  onstalled?: EventHandler<T, Event>
+  onsubmit?: EventHandler<
+    T,
+    Event & {
+      submitter: HTMLElement
+    }
+  >
+  onsuspend?: EventHandler<T, Event>
+  ontimeupdate?: EventHandler<T, Event>
+  ontouchcancel?: EventHandler<T, TouchEvent>
+  ontouchend?: EventHandler<T, TouchEvent>
+  ontouchmove?: EventHandler<T, TouchEvent>
+  ontouchstart?: EventHandler<T, TouchEvent>
+  ontransitionend?: EventHandler<T, TransitionEvent>
+  onvolumechange?: EventHandler<T, Event>
+  onwaiting?: EventHandler<T, Event>
+  onwheel?: EventHandler<T, WheelEvent>
+}
+declare type HTMLAutocapitalize = 'off' | 'none' | 'on' | 'sentences' | 'words' | 'characters'
+declare type HTMLAutocomplete =
+  | 'additional-name'
+  | 'address-level1'
+  | 'address-level2'
+  | 'address-level3'
+  | 'address-level4'
+  | 'address-line1'
+  | 'address-line2'
+  | 'address-line3'
+  | 'bday'
+  | 'bday-year'
+  | 'bday-day'
+  | 'bday-month'
+  | 'billing'
+  | 'cc-additional-name'
+  | 'cc-csc'
+  | 'cc-exp'
+  | 'cc-exp-month'
+  | 'cc-exp-year'
+  | 'cc-family-name'
+  | 'cc-given-name'
+  | 'cc-name'
+  | 'cc-number'
+  | 'cc-type'
+  | 'country'
+  | 'country-name'
+  | 'current-password'
+  | 'email'
+  | 'family-name'
+  | 'fax'
+  | 'given-name'
+  | 'home'
+  | 'honorific-prefix'
+  | 'honorific-suffix'
+  | 'impp'
+  | 'language'
+  | 'mobile'
+  | 'name'
+  | 'new-password'
+  | 'nickname'
+  | 'organization'
+  | 'organization-title'
+  | 'pager'
+  | 'photo'
+  | 'postal-code'
+  | 'sex'
+  | 'shipping'
+  | 'street-address'
+  | 'tel-area-code'
+  | 'tel'
+  | 'tel-country-code'
+  | 'tel-extension'
+  | 'tel-local'
+  | 'tel-local-prefix'
+  | 'tel-local-suffix'
+  | 'tel-national'
+  | 'transaction-amount'
+  | 'transaction-currency'
+  | 'url'
+  | 'username'
+  | 'work'
+declare type HTMLCrossorigin = 'anonymous' | 'use-credentials' | ''
+declare type HTMLDir = 'ltr' | 'rtl' | 'auto'
+declare type HTMLFormEncType = 'application/x-www-form-urlencoded' | 'multipart/form-data' | 'text/plain'
+declare type HTMLFormMethod = 'post' | 'get' | 'dialog'
+declare type HTMLIframeSandbox =
+  | 'allow-downloads-without-user-activation'
+  | 'allow-forms'
+  | 'allow-modals'
+  | 'allow-orientation-lock'
+  | 'allow-pointer-lock'
+  | 'allow-popups'
+  | 'allow-popups-to-escape-sandbox'
+  | 'allow-presentation'
+  | 'allow-same-origin'
+  | 'allow-scripts'
+  | 'allow-storage-access-by-user-activation'
+  | 'allow-top-navigation'
+  | 'allow-top-navigation-by-user-activation'
+declare type HTMLLinkAs =
+  | 'audio'
+  | 'document'
+  | 'embed'
+  | 'fetch'
+  | 'font'
+  | 'image'
+  | 'object'
+  | 'script'
+  | 'style'
+  | 'track'
+  | 'video'
+  | 'worker'
+declare type HTMLReferrerPolicy =
+  | 'no-referrer'
+  | 'no-referrer-when-downgrade'
+  | 'origin'
+  | 'origin-when-cross-origin'
+  | 'same-origin'
+  | 'strict-origin'
+  | 'strict-origin-when-cross-origin'
+  | 'unsafe-url'
+
+declare type HTMLRole =
   | 'alert'
   | 'alertdialog'
   | 'application'
@@ -108,7 +488,7 @@ export type HTMLRole =
   | 'treeitem'
   | 'widget'
   | 'window'
-export interface HTMLAttributes<T> extends AriaAttributes, DOMAttributes<T> {
+interface HTMLAttributes<T> extends AriaAttributes, DOMAttributes<T> {
   /**
    * Provides a hint for generating a keyboard shortcut for the current element. This attribute consists of a space-separated list of characters. The browser should use the first one that exists on the computer keyboard layout.
    */
@@ -144,14 +524,7 @@ export interface HTMLAttributes<T> extends AriaAttributes, DOMAttributes<T> {
   /**
    * Hints what action label (or icon) to present for the enter key on virtual keyboards.
    */
-  enterkeyhint?:
-    | 'enter'
-    | 'done'
-    | 'go'
-    | 'next'
-    | 'previous'
-    | 'search'
-    | 'send'
+  enterkeyhint?: 'enter' | 'done' | 'go' | 'next' | 'previous' | 'search' | 'send'
   /**
    * Used to transitively export shadow parts from a nested shadow tree into a containing light tree.
    */
@@ -167,15 +540,7 @@ export interface HTMLAttributes<T> extends AriaAttributes, DOMAttributes<T> {
   /**
    * Provides a hint to browsers as to the type of virtual keyboard configuration to use when editing this element or its contents. Used primarily on `<input>` elements, but is usable on any element while in contenteditable mode.
    */
-  inputmode?:
-    | 'none'
-    | 'text'
-    | 'tel'
-    | 'url'
-    | 'email'
-    | 'numeric'
-    | 'decimal'
-    | 'search'
+  inputmode?: 'none' | 'text' | 'tel' | 'url' | 'email' | 'numeric' | 'decimal' | 'search'
   /**
    * Allows you to specify that a standard HTML element should behave like a registered custom built-in element (see Using custom elements for more details).
    */
@@ -225,7 +590,7 @@ export interface HTMLAttributes<T> extends AriaAttributes, DOMAttributes<T> {
   /**
    * Contains CSS styling declarations to be applied to the element. Note that it is recommended for styles to be defined in a separate file or files. This attribute and the `<style>` element have mainly the purpose of allowing for quick styling, for example for testing purposes.
    */
-  style?: CSSProperties | string
+  style?: StandardProperties | string
   /**
    * An integer attribute indicating if the element can take input focus (is focusable), if it should participate to sequential keyboard navigation, and if so, at what position. It can take several values: a negative value means that the element should be focusable, but should not be reachable via sequential keyboard navigation; 0 means that the element should be focusable and reachable via sequential keyboard navigation, but its relative order is defined by the platform convention; a positive value means that the element should be focusable and reachable via sequential keyboard navigation; the order in which the elements are focused is the increasing value of the tabindex. If several elements share the same tabindex, their relative order follows their relative positions in the document.
    */
@@ -471,7 +836,8 @@ interface BasefontHTMLAttributes<T> extends HTMLAttributes<T> {
    */
   size?: string
 }
-interface BdoHTMLAttributes<T> extends HTMLAttributes<T> {}
+interface BdoHTMLAttributes<T> extends HTMLAttributes<T> {
+}
 interface BgsoundHTMLAttributes<T> extends HTMLAttributes<T> {
   /**
    * This attribute defines a number between -10,000 and +10,000 that determines how the volume will be divided between the speakers.
@@ -626,10 +992,7 @@ interface ButtonHTMLAttributes<T> extends HTMLAttributes<T> {
   /**
    * If the button is a submit button (it's inside/associated with a `<form>` and doesn't have type="button"), specifies how to encode the form data that is submitted. Possible values: application/x-www-form-urlencoded: The default if the attribute is not used. multipart/form-data: Use to submit `<input>` elements with their type attributes set to file. text/plain: Specified as a debugging aid; shouldn’t be used for real form submission. If this attribute is specified, it overrides the enctype attribute of the button's form owner.
    */
-  formenctype?:
-    | 'application/x-www-form-urlencoded'
-    | 'multipart/form-data'
-    | 'text/plain'
+  formenctype?: 'application/x-www-form-urlencoded' | 'multipart/form-data' | 'text/plain'
   /**
    * If the button is a submit button (it's inside/associated with a `<form>` and doesn't have type="button"), this attribute specifies the HTTP method used to submit the form. Possible values: post: The data from the form are included in the body of the HTTP request when sent to the server. Use when the form contains information that shouldn’t be public, like login credentials. get: The form data are appended to the form's action URL, with a ? as a separator, and the resulting URL is sent to the server. Use this method when the form has no side effects, like search forms. If specified, this attribute overrides the method attribute of the button's form owner.
    */
@@ -1147,10 +1510,7 @@ interface InputHTMLAttributes<T> extends HTMLAttributes<T> {
   /**
    * Valid for the image and submit input types only. See the submit input type for more information.
    */
-  formenctype?:
-    | 'application/x-www-form-urlencoded'
-    | 'multipart/form-data'
-    | 'text/plain'
+  formenctype?: 'application/x-www-form-urlencoded' | 'multipart/form-data' | 'text/plain'
   /**
    * Valid for the image and submit input types only. See the submit input type for more information.
    */
@@ -1480,12 +1840,7 @@ interface MetaHTMLAttributes<T> extends HTMLAttributes<T> {
   /**
    * Defines a pragma directive. The attribute is named http-equiv(alent) because all the allowed values are names of particular HTTP headers: content-security-policy Allows page authors to define a content policy for the current page. Content policies mostly specify allowed server origins and script endpoints which help guard against cross-site scripting attacks. content-type Declares the MIME type and character encoding of the document. If specified, the content attribute must have the value "text/html; charset=utf-8". This is equivalent to a `<meta>` element with the charset attribute specified, and carries the same restriction on placement within the document. Note: Can only be used in documents served with a text/html — not in documents served with an XML MIME type. default-style Sets the name of the default CSS style sheet set. x-ua-compatible If specified, the content attribute must have the value "IE=edge". User agents are required to ignore this pragma. refresh This instruction specifies: The number of seconds until the page should be reloaded - only if the content attribute contains a positive integer. The number of seconds until the page should redirect to another - only if the content attribute contains a positive integer followed by the string ';url=', and a valid URL. Accessibility concerns Pages set with a refresh value run the risk of having the time interval being too short. People navigating with the aid of assistive technology such as a screen reader may be unable to read through and understand the page's content before being automatically redirected. The abrupt, unannounced updating of the page content may also be disorienting for people experiencing low vision conditions. MDN Understanding WCAG, Guideline 2.1 explanations MDN Understanding WCAG, Guideline 3.1 explanations Understanding Success Criterion 2.2.1 | W3C Understanding WCAG 2.0 Understanding Success Criterion 2.2.4 | W3C Understanding WCAG 2.0 Understanding Success Criterion 3.2.5 | W3C Understanding WCAG 2.0
    */
-  'http-equiv'?:
-    | 'content-type'
-    | 'default-style'
-    | 'refresh'
-    | 'x-ua-compatible'
-    | 'content-security-policy'
+  'http-equiv'?: 'content-type' | 'default-style' | 'refresh' | 'x-ua-compatible' | 'content-security-policy'
   /** */
   media?: number | string | (number | string)[]
   /**
@@ -2231,7 +2586,7 @@ interface VideoHTMLAttributes<T> extends HTMLAttributes<T> {
    */
   width?: number | string
 }
-export interface HTMLElements {
+interface HTMLElements {
   /**
    * The `<a>` HTML element (or anchor element), with its href attribute, creates a hyperlink to web pages, files, email addresses, locations in the same page, or anything else a URL can address.
    *
@@ -4004,4 +4359,937 @@ export interface HTMLElements {
    * [MDN Reference](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/xmp)
    */
   xmp: HTMLAttributes<HTMLElement>
+}
+
+declare type SVGPreserveAspectRatio =
+  | 'none'
+  | 'xMinYMin'
+  | 'xMidYMin'
+  | 'xMaxYMin'
+  | 'xMinYMid'
+  | 'xMidYMid'
+  | 'xMaxYMid'
+  | 'xMinYMax'
+  | 'xMidYMax'
+  | 'xMaxYMax'
+  | 'xMinYMin meet'
+  | 'xMidYMin meet'
+  | 'xMaxYMin meet'
+  | 'xMinYMid meet'
+  | 'xMidYMid meet'
+  | 'xMaxYMid meet'
+  | 'xMinYMax meet'
+  | 'xMidYMax meet'
+  | 'xMaxYMax meet'
+  | 'xMinYMin slice'
+  | 'xMidYMin slice'
+  | 'xMaxYMin slice'
+  | 'xMinYMid slice'
+  | 'xMidYMid slice'
+  | 'xMaxYMid slice'
+  | 'xMinYMax slice'
+  | 'xMidYMax slice'
+  | 'xMaxYMax slice'
+declare type ImagePreserveAspectRatio =
+  | SVGPreserveAspectRatio
+  | 'defer none'
+  | 'defer xMinYMin'
+  | 'defer xMidYMin'
+  | 'defer xMaxYMin'
+  | 'defer xMinYMid'
+  | 'defer xMidYMid'
+  | 'defer xMaxYMid'
+  | 'defer xMinYMax'
+  | 'defer xMidYMax'
+  | 'defer xMaxYMax'
+  | 'defer xMinYMin meet'
+  | 'defer xMidYMin meet'
+  | 'defer xMaxYMin meet'
+  | 'defer xMinYMid meet'
+  | 'defer xMidYMid meet'
+  | 'defer xMaxYMid meet'
+  | 'defer xMinYMax meet'
+  | 'defer xMidYMax meet'
+  | 'defer xMaxYMax meet'
+  | 'defer xMinYMin slice'
+  | 'defer xMidYMin slice'
+  | 'defer xMaxYMin slice'
+  | 'defer xMinYMid slice'
+  | 'defer xMidYMid slice'
+  | 'defer xMaxYMid slice'
+  | 'defer xMinYMax slice'
+  | 'defer xMidYMax slice'
+  | 'defer xMaxYMax slice'
+declare type SVGUnits = 'userSpaceOnUse' | 'objectBoundingBox'
+interface SVGAttributes<T> extends DOMAttributes<T> {
+  id?: string
+  lang?: string
+  /**
+   * A space-separated list of the part names of the element. Part names allows CSS to select and style specific elements in a shadow tree via the ::part pseudo-element.
+   */
+  part?: string
+  /**
+   * An integer attribute indicating if the element can take input focus (is focusable), if it should participate to sequential keyboard navigation, and if so, at what position. It can take several values: a negative value means that the element should be focusable, but should not be reachable via sequential keyboard navigation; 0 means that the element should be focusable and reachable via sequential keyboard navigation, but its relative order is defined by the platform convention; a positive value means that the element should be focusable and reachable via sequential keyboard navigation; the order in which the elements are focused is the increasing value of the tabindex. If several elements share the same tabindex, their relative order follows their relative positions in the document.
+   */
+  tabindex?: number | string
+}
+interface StylableSVGAttributes {
+  class?: string
+  style?: StandardProperties | string
+}
+interface TransformableSVGAttributes {
+  transform?: string
+}
+interface ConditionalProcessingSVGAttributes {
+  requiredExtensions?: string
+  requiredFeatures?: string
+  systemLanguage?: string
+}
+interface ExternalResourceSVGAttributes {
+  externalResourcesRequired?: 'true' | 'false'
+}
+interface AnimationTimingSVGAttributes {
+  begin?: string
+  dur?: string
+  end?: string
+  min?: string
+  max?: string
+  restart?: 'always' | 'whenNotActive' | 'never'
+  repeatCount?: number | 'indefinite'
+  repeatDur?: string
+  fill?: 'freeze' | 'remove'
+}
+interface AnimationValueSVGAttributes {
+  calcMode?: 'discrete' | 'linear' | 'paced' | 'spline'
+  values?: string
+  keyTimes?: string
+  keySplines?: string
+  from?: number | string
+  to?: number | string
+  by?: number | string
+}
+interface AnimationAdditionSVGAttributes {
+  attributeName?: string
+  additive?: 'replace' | 'sum'
+  accumulate?: 'none' | 'sum'
+}
+interface AnimationAttributeTargetSVGAttributes {
+  attributeName?: string
+  attributeType?: 'CSS' | 'XML' | 'auto'
+}
+interface PresentationSVGAttributes {
+  'alignment-baseline'?:
+    | 'auto'
+    | 'baseline'
+    | 'before-edge'
+    | 'text-before-edge'
+    | 'middle'
+    | 'central'
+    | 'after-edge'
+    | 'text-after-edge'
+    | 'ideographic'
+    | 'alphabetic'
+    | 'hanging'
+    | 'mathematical'
+    | 'inherit'
+  'baseline-shift'?: number | string
+  clip?: string
+  'clip-path'?: string
+  'clip-rule'?: 'nonzero' | 'evenodd' | 'inherit'
+  color?: string
+  'color-interpolation'?: 'auto' | 'sRGB' | 'linearRGB' | 'inherit'
+  'color-interpolation-filters'?: 'auto' | 'sRGB' | 'linearRGB' | 'inherit'
+  'color-profile'?: string
+  'color-rendering'?: 'auto' | 'optimizeSpeed' | 'optimizeQuality' | 'inherit'
+  cursor?: string
+  direction?: 'ltr' | 'rtl' | 'inherit'
+  display?: string
+  'dominant-baseline'?:
+    | 'auto'
+    | 'text-bottom'
+    | 'alphabetic'
+    | 'ideographic'
+    | 'middle'
+    | 'central'
+    | 'mathematical'
+    | 'hanging'
+    | 'text-top'
+    | 'inherit'
+  'enable-background'?: string
+  fill?: string
+  'fill-opacity'?: number | string | 'inherit'
+  'fill-rule'?: 'nonzero' | 'evenodd' | 'inherit'
+  filter?: string
+  'flood-color'?: string
+  'flood-opacity'?: number | string | 'inherit'
+  'font-family'?: string
+  'font-size'?: number | string
+  'font-size-adjust'?: number | string
+  'font-stretch'?: string
+  'font-style'?: 'normal' | 'italic' | 'oblique' | 'inherit'
+  'font-variant'?: string
+  'font-weight'?: number | string
+  'glyph-orientation-horizontal'?: string
+  'glyph-orientation-vertical'?: string
+  'image-rendering'?: 'auto' | 'optimizeQuality' | 'optimizeSpeed' | 'inherit'
+  kerning?: string
+  'letter-spacing'?: number | string
+  'lighting-color'?: string
+  'marker-end'?: string
+  'marker-mid'?: string
+  'marker-start'?: string
+  mask?: string
+  opacity?: number | string | 'inherit'
+  overflow?: 'visible' | 'hidden' | 'scroll' | 'auto' | 'inherit'
+  'pointer-events'?:
+    | 'bounding-box'
+    | 'visiblePainted'
+    | 'visibleFill'
+    | 'visibleStroke'
+    | 'visible'
+    | 'painted'
+    | 'color'
+    | 'fill'
+    | 'stroke'
+    | 'all'
+    | 'none'
+    | 'inherit'
+  'shape-rendering'?: 'auto' | 'optimizeSpeed' | 'crispEdges' | 'geometricPrecision' | 'inherit'
+  'stop-color'?: string
+  'stop-opacity'?: number | string | 'inherit'
+  stroke?: string
+  'stroke-dasharray'?: string
+  'stroke-dashoffset'?: number | string
+  'stroke-linecap'?: 'butt' | 'round' | 'square' | 'inherit'
+  'stroke-linejoin'?: 'arcs' | 'bevel' | 'miter' | 'miter-clip' | 'round' | 'inherit'
+  'stroke-miterlimit'?: number | string | 'inherit'
+  'stroke-opacity'?: number | string | 'inherit'
+  'stroke-width'?: number | string
+  'text-anchor'?: 'start' | 'middle' | 'end' | 'inherit'
+  'text-decoration'?: 'none' | 'underline' | 'overline' | 'line-through' | 'blink' | 'inherit'
+  'text-rendering'?: 'auto' | 'optimizeSpeed' | 'optimizeLegibility' | 'geometricPrecision' | 'inherit'
+  'unicode-bidi'?: string
+  visibility?: 'visible' | 'hidden' | 'collapse' | 'inherit'
+  'word-spacing'?: number | string
+  'writing-mode'?: 'lr-tb' | 'rl-tb' | 'tb-rl' | 'lr' | 'rl' | 'tb' | 'inherit'
+}
+interface AnimationElementSVGAttributes<T>
+  extends SVGAttributes<T>, ExternalResourceSVGAttributes, ConditionalProcessingSVGAttributes
+{
+}
+interface ContainerElementSVGAttributes<T>
+  extends
+    SVGAttributes<T>,
+    Pick<
+      PresentationSVGAttributes,
+      | 'clip-path'
+      | 'mask'
+      | 'cursor'
+      | 'opacity'
+      | 'filter'
+      | 'enable-background'
+      | 'color-interpolation'
+      | 'color-rendering'
+    >
+{
+}
+interface FilterPrimitiveElementSVGAttributes<T>
+  extends SVGAttributes<T>, Pick<PresentationSVGAttributes, 'color-interpolation-filters'>
+{
+  x?: number | string
+  y?: number | string
+  width?: number | string
+  height?: number | string
+  result?: string
+}
+interface SingleInputFilterSVGAttributes {
+  in?: string
+}
+interface DoubleInputFilterSVGAttributes {
+  in?: string
+  in2?: string
+}
+interface FitToViewBoxSVGAttributes {
+  viewBox?: string
+  preserveAspectRatio?: SVGPreserveAspectRatio
+}
+interface GradientElementSVGAttributes<T>
+  extends SVGAttributes<T>, ExternalResourceSVGAttributes, StylableSVGAttributes
+{
+  gradientUnits?: SVGUnits
+  gradientTransform?: string
+  spreadMethod?: 'pad' | 'reflect' | 'repeat'
+}
+interface GraphicsElementSVGAttributes<T>
+  extends
+    SVGAttributes<T>,
+    Pick<
+      PresentationSVGAttributes,
+      | 'clip-rule'
+      | 'mask'
+      | 'pointer-events'
+      | 'cursor'
+      | 'opacity'
+      | 'filter'
+      | 'display'
+      | 'visibility'
+      | 'color-interpolation'
+      | 'color-rendering'
+    >
+{
+}
+interface LightSourceElementSVGAttributes<T> extends SVGAttributes<T> {
+}
+interface NewViewportSVGAttributes<T> extends SVGAttributes<T>, Pick<PresentationSVGAttributes, 'overflow' | 'clip'> {
+  viewBox?: string
+}
+interface ShapeElementSVGAttributes<T>
+  extends
+    SVGAttributes<T>,
+    Pick<
+      PresentationSVGAttributes,
+      | 'color'
+      | 'fill-opacity'
+      | 'fill-rule'
+      | 'fill'
+      | 'shape-rendering'
+      | 'stroke-dasharray'
+      | 'stroke-dashoffset'
+      | 'stroke-linecap'
+      | 'stroke-linejoin'
+      | 'stroke-miterlimit'
+      | 'stroke-opacity'
+      | 'stroke-width'
+      | 'stroke'
+    >
+{
+}
+interface TextContentElementSVGAttributes<T>
+  extends
+    SVGAttributes<T>,
+    Pick<
+      PresentationSVGAttributes,
+      | 'color'
+      | 'direction'
+      | 'dominant-baseline'
+      | 'fill-opacity'
+      | 'fill-rule'
+      | 'fill'
+      | 'font-family'
+      | 'font-size-adjust'
+      | 'font-size'
+      | 'font-stretch'
+      | 'font-style'
+      | 'font-variant'
+      | 'font-weight'
+      | 'glyph-orientation-horizontal'
+      | 'glyph-orientation-vertical'
+      | 'kerning'
+      | 'letter-spacing'
+      | 'stroke-dasharray'
+      | 'stroke-dashoffset'
+      | 'stroke-linecap'
+      | 'stroke-linejoin'
+      | 'stroke-miterlimit'
+      | 'stroke-opacity'
+      | 'stroke-width'
+      | 'stroke'
+      | 'text-anchor'
+      | 'text-decoration'
+      | 'unicode-bidi'
+      | 'word-spacing'
+    >
+{
+}
+interface ZoomAndPanSVGAttributes {
+  zoomAndPan?: 'disable' | 'magnify'
+}
+interface AnimateSVGAttributes<T>
+  extends
+    AnimationElementSVGAttributes<T>,
+    AnimationAttributeTargetSVGAttributes,
+    AnimationTimingSVGAttributes,
+    AnimationValueSVGAttributes,
+    AnimationAdditionSVGAttributes,
+    Pick<PresentationSVGAttributes, 'color-interpolation' | 'color-rendering'>
+{
+}
+interface AnimateMotionSVGAttributes<T>
+  extends
+    AnimationElementSVGAttributes<T>,
+    AnimationTimingSVGAttributes,
+    AnimationValueSVGAttributes,
+    AnimationAdditionSVGAttributes
+{
+  path?: string
+  keyPoints?: string
+  rotate?: number | string | 'auto' | 'auto-reverse'
+  origin?: 'default'
+}
+interface AnimateTransformSVGAttributes<T>
+  extends
+    AnimationElementSVGAttributes<T>,
+    AnimationAttributeTargetSVGAttributes,
+    AnimationTimingSVGAttributes,
+    AnimationValueSVGAttributes,
+    AnimationAdditionSVGAttributes
+{
+  type?: 'translate' | 'scale' | 'rotate' | 'skewX' | 'skewY'
+}
+interface CircleSVGAttributes<T>
+  extends
+    GraphicsElementSVGAttributes<T>,
+    ShapeElementSVGAttributes<T>,
+    ConditionalProcessingSVGAttributes,
+    StylableSVGAttributes,
+    TransformableSVGAttributes
+{
+  cx?: number | string
+  cy?: number | string
+  r?: number | string
+}
+interface ClipPathSVGAttributes<T>
+  extends
+    SVGAttributes<T>,
+    ConditionalProcessingSVGAttributes,
+    ExternalResourceSVGAttributes,
+    StylableSVGAttributes,
+    TransformableSVGAttributes,
+    Pick<PresentationSVGAttributes, 'clip-path'>
+{
+  clipPathUnits?: SVGUnits
+}
+interface DefsSVGAttributes<T>
+  extends
+    ContainerElementSVGAttributes<T>,
+    ConditionalProcessingSVGAttributes,
+    ExternalResourceSVGAttributes,
+    StylableSVGAttributes,
+    TransformableSVGAttributes
+{
+}
+interface DescSVGAttributes<T> extends SVGAttributes<T>, StylableSVGAttributes {
+}
+interface EllipseSVGAttributes<T>
+  extends
+    GraphicsElementSVGAttributes<T>,
+    ShapeElementSVGAttributes<T>,
+    ConditionalProcessingSVGAttributes,
+    ExternalResourceSVGAttributes,
+    StylableSVGAttributes,
+    TransformableSVGAttributes
+{
+  cx?: number | string
+  cy?: number | string
+  rx?: number | string
+  ry?: number | string
+}
+interface FeBlendSVGAttributes<T>
+  extends FilterPrimitiveElementSVGAttributes<T>, DoubleInputFilterSVGAttributes, StylableSVGAttributes
+{
+  mode?: 'normal' | 'multiply' | 'screen' | 'darken' | 'lighten'
+}
+interface FeColorMatrixSVGAttributes<T>
+  extends FilterPrimitiveElementSVGAttributes<T>, SingleInputFilterSVGAttributes, StylableSVGAttributes
+{
+  type?: 'matrix' | 'saturate' | 'hueRotate' | 'luminanceToAlpha'
+  values?: string
+}
+interface FeComponentTransferSVGAttributes<T>
+  extends FilterPrimitiveElementSVGAttributes<T>, SingleInputFilterSVGAttributes, StylableSVGAttributes
+{
+}
+interface FeCompositeSVGAttributes<T>
+  extends FilterPrimitiveElementSVGAttributes<T>, DoubleInputFilterSVGAttributes, StylableSVGAttributes
+{
+  operator?: 'over' | 'in' | 'out' | 'atop' | 'xor' | 'arithmetic'
+  k1?: number | string
+  k2?: number | string
+  k3?: number | string
+  k4?: number | string
+}
+interface FeConvolveMatrixSVGAttributes<T>
+  extends FilterPrimitiveElementSVGAttributes<T>, SingleInputFilterSVGAttributes, StylableSVGAttributes
+{
+  order?: number | string
+  kernelMatrix?: string
+  divisor?: number | string
+  bias?: number | string
+  targetX?: number | string
+  targetY?: number | string
+  edgeMode?: 'duplicate' | 'wrap' | 'none'
+  kernelUnitLength?: number | string
+  preserveAlpha?: 'true' | 'false'
+}
+interface FeDiffuseLightingSVGAttributes<T>
+  extends
+    FilterPrimitiveElementSVGAttributes<T>,
+    SingleInputFilterSVGAttributes,
+    StylableSVGAttributes,
+    Pick<PresentationSVGAttributes, 'color' | 'lighting-color'>
+{
+  surfaceScale?: number | string
+  diffuseConstant?: number | string
+  kernelUnitLength?: number | string
+}
+interface FeDisplacementMapSVGAttributes<T>
+  extends FilterPrimitiveElementSVGAttributes<T>, DoubleInputFilterSVGAttributes, StylableSVGAttributes
+{
+  scale?: number | string
+  xChannelSelector?: 'R' | 'G' | 'B' | 'A'
+  yChannelSelector?: 'R' | 'G' | 'B' | 'A'
+}
+interface FeDistantLightSVGAttributes<T> extends LightSourceElementSVGAttributes<T> {
+  azimuth?: number | string
+  elevation?: number | string
+}
+interface FeFloodSVGAttributes<T>
+  extends
+    FilterPrimitiveElementSVGAttributes<T>,
+    StylableSVGAttributes,
+    Pick<PresentationSVGAttributes, 'color' | 'flood-color' | 'flood-opacity'>
+{
+}
+interface FeFuncSVGAttributes<T> extends SVGAttributes<T> {
+  type?: 'identity' | 'table' | 'discrete' | 'linear' | 'gamma'
+  tableValues?: string
+  slope?: number | string
+  intercept?: number | string
+  amplitude?: number | string
+  exponent?: number | string
+  offset?: number | string
+}
+interface FeGaussianBlurSVGAttributes<T>
+  extends FilterPrimitiveElementSVGAttributes<T>, SingleInputFilterSVGAttributes, StylableSVGAttributes
+{
+  stdDeviation?: number | string
+}
+interface FeImageSVGAttributes<T>
+  extends FilterPrimitiveElementSVGAttributes<T>, ExternalResourceSVGAttributes, StylableSVGAttributes
+{
+  preserveAspectRatio: SVGPreserveAspectRatio
+}
+interface FeMergeSVGAttributes<T> extends FilterPrimitiveElementSVGAttributes<T>, StylableSVGAttributes {
+}
+interface FeMergeNodeSVGAttributes<T> extends SVGAttributes<T>, SingleInputFilterSVGAttributes {
+}
+interface FeMorphologySVGAttributes<T>
+  extends FilterPrimitiveElementSVGAttributes<T>, SingleInputFilterSVGAttributes, StylableSVGAttributes
+{
+  operator?: 'erode' | 'dilate'
+  radius?: number | string
+}
+interface FeOffsetSVGAttributes<T>
+  extends FilterPrimitiveElementSVGAttributes<T>, SingleInputFilterSVGAttributes, StylableSVGAttributes
+{
+  dx?: number | string
+  dy?: number | string
+}
+interface FePointLightSVGAttributes<T> extends LightSourceElementSVGAttributes<T> {
+  x?: number | string
+  y?: number | string
+  z?: number | string
+}
+interface FeSpecularLightingSVGAttributes<T>
+  extends
+    FilterPrimitiveElementSVGAttributes<T>,
+    SingleInputFilterSVGAttributes,
+    StylableSVGAttributes,
+    Pick<PresentationSVGAttributes, 'color' | 'lighting-color'>
+{
+  surfaceScale?: string
+  specularConstant?: string
+  specularExponent?: string
+  kernelUnitLength?: number | string
+}
+interface FeSpotLightSVGAttributes<T> extends LightSourceElementSVGAttributes<T> {
+  x?: number | string
+  y?: number | string
+  z?: number | string
+  pointsAtX?: number | string
+  pointsAtY?: number | string
+  pointsAtZ?: number | string
+  specularExponent?: number | string
+  limitingConeAngle?: number | string
+}
+interface FeTileSVGAttributes<T>
+  extends FilterPrimitiveElementSVGAttributes<T>, SingleInputFilterSVGAttributes, StylableSVGAttributes
+{
+}
+interface FeTurbulanceSVGAttributes<T> extends FilterPrimitiveElementSVGAttributes<T>, StylableSVGAttributes {
+  baseFrequency?: number | string
+  numOctaves?: number | string
+  seed?: number | string
+  stitchTiles?: 'stitch' | 'noStitch'
+  type?: 'fractalNoise' | 'turbulence'
+}
+interface FilterSVGAttributes<T> extends SVGAttributes<T>, ExternalResourceSVGAttributes, StylableSVGAttributes {
+  filterUnits?: SVGUnits
+  primitiveUnits?: SVGUnits
+  x?: number | string
+  y?: number | string
+  width?: number | string
+  height?: number | string
+  filterRes?: number | string
+}
+interface ForeignObjectSVGAttributes<T>
+  extends
+    NewViewportSVGAttributes<T>,
+    ConditionalProcessingSVGAttributes,
+    ExternalResourceSVGAttributes,
+    StylableSVGAttributes,
+    TransformableSVGAttributes,
+    Pick<PresentationSVGAttributes, 'display' | 'visibility'>
+{
+  x?: number | string
+  y?: number | string
+  width?: number | string
+  height?: number | string
+}
+interface GSVGAttributes<T>
+  extends
+    ContainerElementSVGAttributes<T>,
+    ConditionalProcessingSVGAttributes,
+    ExternalResourceSVGAttributes,
+    StylableSVGAttributes,
+    TransformableSVGAttributes,
+    Pick<PresentationSVGAttributes, 'display' | 'visibility'>
+{
+}
+interface ImageSVGAttributes<T>
+  extends
+    NewViewportSVGAttributes<T>,
+    GraphicsElementSVGAttributes<T>,
+    ConditionalProcessingSVGAttributes,
+    StylableSVGAttributes,
+    TransformableSVGAttributes,
+    Pick<PresentationSVGAttributes, 'color-profile' | 'image-rendering'>
+{
+  x?: number | string
+  y?: number | string
+  width?: number | string
+  height?: number | string
+  preserveAspectRatio?: ImagePreserveAspectRatio
+}
+interface LineSVGAttributes<T>
+  extends
+    GraphicsElementSVGAttributes<T>,
+    ShapeElementSVGAttributes<T>,
+    ConditionalProcessingSVGAttributes,
+    ExternalResourceSVGAttributes,
+    StylableSVGAttributes,
+    TransformableSVGAttributes,
+    Pick<PresentationSVGAttributes, 'marker-start' | 'marker-mid' | 'marker-end'>
+{
+  x1?: number | string
+  y1?: number | string
+  x2?: number | string
+  y2?: number | string
+}
+interface LinearGradientSVGAttributes<T> extends GradientElementSVGAttributes<T> {
+  x1?: number | string
+  x2?: number | string
+  y1?: number | string
+  y2?: number | string
+}
+interface MarkerSVGAttributes<T>
+  extends
+    ContainerElementSVGAttributes<T>,
+    ExternalResourceSVGAttributes,
+    StylableSVGAttributes,
+    FitToViewBoxSVGAttributes,
+    Pick<PresentationSVGAttributes, 'overflow' | 'clip'>
+{
+  markerUnits?: 'strokeWidth' | 'userSpaceOnUse'
+  refX?: number | string
+  refY?: number | string
+  markerWidth?: number | string
+  markerHeight?: number | string
+  orient?: string
+}
+interface MaskSVGAttributes<T>
+  extends
+    Omit<ContainerElementSVGAttributes<T>, 'opacity' | 'filter'>,
+    ConditionalProcessingSVGAttributes,
+    ExternalResourceSVGAttributes,
+    StylableSVGAttributes
+{
+  maskUnits?: SVGUnits
+  maskContentUnits?: SVGUnits
+  x?: number | string
+  y?: number | string
+  width?: number | string
+  height?: number | string
+}
+interface MetadataSVGAttributes<T> extends SVGAttributes<T> {
+}
+interface PathSVGAttributes<T>
+  extends
+    GraphicsElementSVGAttributes<T>,
+    ShapeElementSVGAttributes<T>,
+    ConditionalProcessingSVGAttributes,
+    ExternalResourceSVGAttributes,
+    StylableSVGAttributes,
+    TransformableSVGAttributes,
+    Pick<PresentationSVGAttributes, 'marker-start' | 'marker-mid' | 'marker-end'>
+{
+  d?: string
+  pathLength?: number | string
+}
+interface PatternSVGAttributes<T>
+  extends
+    ContainerElementSVGAttributes<T>,
+    ConditionalProcessingSVGAttributes,
+    ExternalResourceSVGAttributes,
+    StylableSVGAttributes,
+    FitToViewBoxSVGAttributes,
+    Pick<PresentationSVGAttributes, 'overflow' | 'clip'>
+{
+  x?: number | string
+  y?: number | string
+  width?: number | string
+  height?: number | string
+  patternUnits?: SVGUnits
+  patternContentUnits?: SVGUnits
+  patternTransform?: string
+}
+interface PolygonSVGAttributes<T>
+  extends
+    GraphicsElementSVGAttributes<T>,
+    ShapeElementSVGAttributes<T>,
+    ConditionalProcessingSVGAttributes,
+    ExternalResourceSVGAttributes,
+    StylableSVGAttributes,
+    TransformableSVGAttributes,
+    Pick<PresentationSVGAttributes, 'marker-start' | 'marker-mid' | 'marker-end'>
+{
+  points?: string
+}
+interface PolylineSVGAttributes<T>
+  extends
+    GraphicsElementSVGAttributes<T>,
+    ShapeElementSVGAttributes<T>,
+    ConditionalProcessingSVGAttributes,
+    ExternalResourceSVGAttributes,
+    StylableSVGAttributes,
+    TransformableSVGAttributes,
+    Pick<PresentationSVGAttributes, 'marker-start' | 'marker-mid' | 'marker-end'>
+{
+  points?: string
+}
+interface RadialGradientSVGAttributes<T> extends GradientElementSVGAttributes<T> {
+  cx?: number | string
+  cy?: number | string
+  r?: number | string
+  fx?: number | string
+  fy?: number | string
+}
+interface RectSVGAttributes<T>
+  extends
+    GraphicsElementSVGAttributes<T>,
+    ShapeElementSVGAttributes<T>,
+    ConditionalProcessingSVGAttributes,
+    ExternalResourceSVGAttributes,
+    StylableSVGAttributes,
+    TransformableSVGAttributes
+{
+  x?: number | string
+  y?: number | string
+  width?: number | string
+  height?: number | string
+  rx?: number | string
+  ry?: number | string
+}
+interface StopSVGAttributes<T>
+  extends
+    SVGAttributes<T>,
+    StylableSVGAttributes,
+    Pick<PresentationSVGAttributes, 'color' | 'stop-color' | 'stop-opacity'>
+{
+  offset?: number | string
+}
+interface SvgSVGAttributes<T>
+  extends
+    ContainerElementSVGAttributes<T>,
+    NewViewportSVGAttributes<T>,
+    ConditionalProcessingSVGAttributes,
+    ExternalResourceSVGAttributes,
+    StylableSVGAttributes,
+    FitToViewBoxSVGAttributes,
+    ZoomAndPanSVGAttributes,
+    PresentationSVGAttributes
+{
+  version?: string
+  'base-profile'?: string
+  x?: number | string
+  y?: number | string
+  width?: number | string
+  height?: number | string
+  contentScriptType?: string
+  contentStyleType?: string
+  xmlns?: string
+}
+interface SwitchSVGAttributes<T>
+  extends
+    ContainerElementSVGAttributes<T>,
+    ConditionalProcessingSVGAttributes,
+    ExternalResourceSVGAttributes,
+    StylableSVGAttributes,
+    TransformableSVGAttributes,
+    Pick<PresentationSVGAttributes, 'display' | 'visibility'>
+{
+}
+interface SymbolSVGAttributes<T>
+  extends
+    ContainerElementSVGAttributes<T>,
+    NewViewportSVGAttributes<T>,
+    ExternalResourceSVGAttributes,
+    StylableSVGAttributes,
+    FitToViewBoxSVGAttributes
+{
+}
+interface TextSVGAttributes<T>
+  extends
+    TextContentElementSVGAttributes<T>,
+    GraphicsElementSVGAttributes<T>,
+    ConditionalProcessingSVGAttributes,
+    ExternalResourceSVGAttributes,
+    StylableSVGAttributes,
+    TransformableSVGAttributes,
+    Pick<PresentationSVGAttributes, 'writing-mode' | 'text-rendering'>
+{
+  x?: number | string
+  y?: number | string
+  dx?: number | string
+  dy?: number | string
+  rotate?: number | string
+  textLength?: number | string
+  lengthAdjust?: 'spacing' | 'spacingAndGlyphs'
+}
+interface TextPathSVGAttributes<T>
+  extends
+    TextContentElementSVGAttributes<T>,
+    ConditionalProcessingSVGAttributes,
+    ExternalResourceSVGAttributes,
+    StylableSVGAttributes,
+    Pick<PresentationSVGAttributes, 'alignment-baseline' | 'baseline-shift' | 'display' | 'visibility'>
+{
+  startOffset?: number | string
+  method?: 'align' | 'stretch'
+  spacing?: 'auto' | 'exact'
+}
+interface TSpanSVGAttributes<T>
+  extends
+    TextContentElementSVGAttributes<T>,
+    ConditionalProcessingSVGAttributes,
+    ExternalResourceSVGAttributes,
+    StylableSVGAttributes,
+    Pick<PresentationSVGAttributes, 'alignment-baseline' | 'baseline-shift' | 'display' | 'visibility'>
+{
+  x?: number | string
+  y?: number | string
+  dx?: number | string
+  dy?: number | string
+  rotate?: number | string
+  textLength?: number | string
+  lengthAdjust?: 'spacing' | 'spacingAndGlyphs'
+}
+interface UseSVGAttributes<T>
+  extends
+    GraphicsElementSVGAttributes<T>,
+    ConditionalProcessingSVGAttributes,
+    ExternalResourceSVGAttributes,
+    StylableSVGAttributes,
+    TransformableSVGAttributes
+{
+  x?: number | string
+  y?: number | string
+  width?: number | string
+  height?: number | string
+}
+interface ViewSVGAttributes<T>
+  extends SVGAttributes<T>, ExternalResourceSVGAttributes, FitToViewBoxSVGAttributes, ZoomAndPanSVGAttributes
+{
+  viewTarget?: string
+}
+interface SVGElements {
+  animate: AnimateSVGAttributes<SVGAnimateElement>
+  animateMotion: AnimateMotionSVGAttributes<SVGAnimateMotionElement>
+  animateTransform: AnimateTransformSVGAttributes<SVGAnimateTransformElement>
+  circle: CircleSVGAttributes<SVGCircleElement>
+  clipPath: ClipPathSVGAttributes<SVGClipPathElement>
+  defs: DefsSVGAttributes<SVGDefsElement>
+  desc: DescSVGAttributes<SVGDescElement>
+  ellipse: EllipseSVGAttributes<SVGEllipseElement>
+  feBlend: FeBlendSVGAttributes<SVGFEBlendElement>
+  feColorMatrix: FeColorMatrixSVGAttributes<SVGFEColorMatrixElement>
+  feComponentTransfer: FeComponentTransferSVGAttributes<SVGFEComponentTransferElement>
+  feComposite: FeCompositeSVGAttributes<SVGFECompositeElement>
+  feConvolveMatrix: FeConvolveMatrixSVGAttributes<SVGFEConvolveMatrixElement>
+  feDiffuseLighting: FeDiffuseLightingSVGAttributes<SVGFEDiffuseLightingElement>
+  feDisplacementMap: FeDisplacementMapSVGAttributes<SVGFEDisplacementMapElement>
+  feDistantLight: FeDistantLightSVGAttributes<SVGFEDistantLightElement>
+  feFlood: FeFloodSVGAttributes<SVGFEFloodElement>
+  feFuncA: FeFuncSVGAttributes<SVGFEFuncAElement>
+  feFuncB: FeFuncSVGAttributes<SVGFEFuncBElement>
+  feFuncG: FeFuncSVGAttributes<SVGFEFuncGElement>
+  feFuncR: FeFuncSVGAttributes<SVGFEFuncRElement>
+  feGaussianBlur: FeGaussianBlurSVGAttributes<SVGFEGaussianBlurElement>
+  feImage: FeImageSVGAttributes<SVGFEImageElement>
+  feMerge: FeMergeSVGAttributes<SVGFEMergeElement>
+  feMergeNode: FeMergeNodeSVGAttributes<SVGFEMergeNodeElement>
+  feMorphology: FeMorphologySVGAttributes<SVGFEMorphologyElement>
+  feOffset: FeOffsetSVGAttributes<SVGFEOffsetElement>
+  fePointLight: FePointLightSVGAttributes<SVGFEPointLightElement>
+  feSpecularLighting: FeSpecularLightingSVGAttributes<SVGFESpecularLightingElement>
+  feSpotLight: FeSpotLightSVGAttributes<SVGFESpotLightElement>
+  feTile: FeTileSVGAttributes<SVGFETileElement>
+  feTurbulence: FeTurbulanceSVGAttributes<SVGFETurbulenceElement>
+  filter: FilterSVGAttributes<SVGFilterElement>
+  foreignObject: ForeignObjectSVGAttributes<SVGForeignObjectElement>
+  g: GSVGAttributes<SVGGElement>
+  image: ImageSVGAttributes<SVGImageElement>
+  line: LineSVGAttributes<SVGLineElement>
+  linearGradient: LinearGradientSVGAttributes<SVGLinearGradientElement>
+  marker: MarkerSVGAttributes<SVGMarkerElement>
+  mask: MaskSVGAttributes<SVGMaskElement>
+  metadata: MetadataSVGAttributes<SVGMetadataElement>
+  path: PathSVGAttributes<SVGPathElement>
+  pattern: PatternSVGAttributes<SVGPatternElement>
+  polygon: PolygonSVGAttributes<SVGPolygonElement>
+  polyline: PolylineSVGAttributes<SVGPolylineElement>
+  radialGradient: RadialGradientSVGAttributes<SVGRadialGradientElement>
+  rect: RectSVGAttributes<SVGRectElement>
+  stop: StopSVGAttributes<SVGStopElement>
+  svg: SvgSVGAttributes<SVGSVGElement>
+  switch: SwitchSVGAttributes<SVGSwitchElement>
+  symbol: SymbolSVGAttributes<SVGSymbolElement>
+  text: TextSVGAttributes<SVGTextElement>
+  textPath: TextPathSVGAttributes<SVGTextPathElement>
+  tspan: TSpanSVGAttributes<SVGTSpanElement>
+  use: UseSVGAttributes<SVGUseElement>
+  view: ViewSVGAttributes<SVGViewElement>
+}
+
+interface IntrinsicElements extends HTMLElements, SVGElements {
+}
+
+export {
+  DOMAttributes,
+  EventHandler,
+  HTMLAttributes,
+  HTMLAutocapitalize,
+  HTMLAutocomplete,
+  HTMLCrossorigin,
+  HTMLDir,
+  HTMLElements,
+  HTMLFormEncType,
+  HTMLFormMethod,
+  HTMLIframeSandbox,
+  HTMLLinkAs,
+  HTMLReferrerPolicy,
+  HTMLRole,
+  IntrinsicElements,
+  SVGAttributes,
+  SVGElements,
 }
