@@ -820,6 +820,7 @@ interface UseSVGAttributes<T>
     StylableSVGAttributes,
     TransformableSVGAttributes
 {
+  href?: string
   x?: number | string
   y?: number | string
   width?: number | string
