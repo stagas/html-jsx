@@ -89,14 +89,14 @@ interface ExternalResourceSVGAttributes {
   externalResourcesRequired?: 'true' | 'false'
 }
 interface AnimationTimingSVGAttributes {
-  begin?: string
-  dur?: string
-  end?: string
-  min?: string
-  max?: string
+  begin?: number | string
+  dur?: number | string
+  end?: number | string
+  min?: number | string
+  max?: number | string
   restart?: 'always' | 'whenNotActive' | 'never'
-  repeatCount?: number | 'indefinite'
-  repeatDur?: string
+  repeatCount?: number | string | 'indefinite'
+  repeatDur?: number | string
   fill?: 'freeze' | 'remove'
 }
 interface AnimationValueSVGAttributes {
@@ -520,9 +520,9 @@ interface FeSpecularLightingSVGAttributes<T>
     StylableSVGAttributes,
     Pick<PresentationSVGAttributes, 'color' | 'lighting-color'>
 {
-  surfaceScale?: string
-  specularConstant?: string
-  specularExponent?: string
+  surfaceScale?: number | string
+  specularConstant?: number | string
+  specularExponent?: number | string
   kernelUnitLength?: number | string
 }
 interface FeSpotLightSVGAttributes<T> extends LightSourceElementSVGAttributes<T> {
