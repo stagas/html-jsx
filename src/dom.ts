@@ -2,84 +2,84 @@ export interface EventHandler<T, E extends Event> {
   (e: E & { currentTarget: T; target: Element }): void
 }
 export interface DOMAttributes<T> {
-  onabort?: EventHandler<T, Event>
-  onanimationend?: EventHandler<T, AnimationEvent>
-  onanimationiteration?: EventHandler<T, AnimationEvent>
-  onanimationstart?: EventHandler<T, AnimationEvent>
-  onblur?: EventHandler<T, FocusEvent>
-  oncanplay?: EventHandler<T, Event>
-  oncanplaythrough?: EventHandler<T, Event>
-  onchange?: EventHandler<T, Event>
-  onclick?: EventHandler<T, MouseEvent>
-  oncompositionend?: EventHandler<T, CompositionEvent>
-  oncompositionstart?: EventHandler<T, CompositionEvent>
-  oncompositionupdate?: EventHandler<T, CompositionEvent>
-  oncontextmenu?: EventHandler<T, MouseEvent>
-  oncopy?: EventHandler<T, ClipboardEvent>
-  oncut?: EventHandler<T, ClipboardEvent>
-  ondblclick?: EventHandler<T, MouseEvent>
-  ondrag?: EventHandler<T, DragEvent>
-  ondragend?: EventHandler<T, DragEvent>
-  ondragenter?: EventHandler<T, DragEvent>
-  ondragexit?: EventHandler<T, DragEvent>
-  ondragleave?: EventHandler<T, DragEvent>
-  ondragover?: EventHandler<T, DragEvent>
-  ondragstart?: EventHandler<T, DragEvent>
-  ondrop?: EventHandler<T, DragEvent>
-  ondurationchange?: EventHandler<T, Event>
-  onemptied?: EventHandler<T, Event>
-  onencrypted?: EventHandler<T, Event>
-  onended?: EventHandler<T, Event>
-  onerror?: EventHandler<T, Event>
-  onfocus?: EventHandler<T, FocusEvent>
-  ongotpointercapture?: EventHandler<T, PointerEvent>
-  oninput?: EventHandler<T, InputEvent>
-  onkeydown?: EventHandler<T, KeyboardEvent>
-  onkeypress?: EventHandler<T, KeyboardEvent>
-  onkeyup?: EventHandler<T, KeyboardEvent>
-  onload?: EventHandler<T, Event>
-  onloadeddata?: EventHandler<T, Event>
-  onloadedmetadata?: EventHandler<T, Event>
-  onloadstart?: EventHandler<T, Event>
-  onlostpointercapture?: EventHandler<T, PointerEvent>
-  onmousedown?: EventHandler<T, MouseEvent>
-  onmouseenter?: EventHandler<T, MouseEvent>
-  onmouseleave?: EventHandler<T, MouseEvent>
-  onmousemove?: EventHandler<T, MouseEvent>
-  onmouseout?: EventHandler<T, MouseEvent>
-  onmouseover?: EventHandler<T, MouseEvent>
-  onmouseup?: EventHandler<T, MouseEvent>
-  onpaste?: EventHandler<T, ClipboardEvent>
-  onpause?: EventHandler<T, Event>
-  onplay?: EventHandler<T, Event>
-  onplaying?: EventHandler<T, Event>
-  onpointercancel?: EventHandler<T, PointerEvent>
-  onpointerdown?: EventHandler<T, PointerEvent>
-  onpointerenter?: EventHandler<T, PointerEvent>
-  onpointerleave?: EventHandler<T, PointerEvent>
-  onpointermove?: EventHandler<T, PointerEvent>
-  onpointerout?: EventHandler<T, PointerEvent>
-  onpointerover?: EventHandler<T, PointerEvent>
-  onpointerup?: EventHandler<T, PointerEvent>
-  onprogress?: EventHandler<T, Event>
-  onratechange?: EventHandler<T, Event>
-  onreset?: EventHandler<T, Event>
-  onscroll?: EventHandler<T, UIEvent>
-  onseeked?: EventHandler<T, Event>
-  onseeking?: EventHandler<T, Event>
-  onselect?: EventHandler<T, UIEvent>
-  onstalled?: EventHandler<T, Event>
-  onsubmit?: EventHandler<T, Event & { submitter: HTMLElement }>
-  onsuspend?: EventHandler<T, Event>
-  ontimeupdate?: EventHandler<T, Event>
-  ontouchcancel?: EventHandler<T, TouchEvent>
-  ontouchend?: EventHandler<T, TouchEvent>
-  ontouchmove?: EventHandler<T, TouchEvent>
-  ontouchstart?: EventHandler<T, TouchEvent>
-  ontransitionend?: EventHandler<T, TransitionEvent>
-  onvolumechange?: EventHandler<T, Event>
-  onwaiting?: EventHandler<T, Event>
-  onwheel?: EventHandler<T, WheelEvent>
+  onabort?: null | false | EventHandler<T, Event>
+  onanimationend?: null | false | EventHandler<T, AnimationEvent>
+  onanimationiteration?: null | false | EventHandler<T, AnimationEvent>
+  onanimationstart?: null | false | EventHandler<T, AnimationEvent>
+  onblur?: null | false | EventHandler<T, FocusEvent>
+  oncanplay?: null | false | EventHandler<T, Event>
+  oncanplaythrough?: null | false | EventHandler<T, Event>
+  onchange?: null | false | EventHandler<T, Event>
+  onclick?: null | false | EventHandler<T, MouseEvent>
+  oncompositionend?: null | false | EventHandler<T, CompositionEvent>
+  oncompositionstart?: null | false | EventHandler<T, CompositionEvent>
+  oncompositionupdate?: null | false | EventHandler<T, CompositionEvent>
+  oncontextmenu?: null | false | EventHandler<T, MouseEvent>
+  oncopy?: null | false | EventHandler<T, ClipboardEvent>
+  oncut?: null | false | EventHandler<T, ClipboardEvent>
+  ondblclick?: null | false | EventHandler<T, MouseEvent>
+  ondrag?: null | false | EventHandler<T, DragEvent>
+  ondragend?: null | false | EventHandler<T, DragEvent>
+  ondragenter?: null | false | EventHandler<T, DragEvent>
+  ondragexit?: null | false | EventHandler<T, DragEvent>
+  ondragleave?: null | false | EventHandler<T, DragEvent>
+  ondragover?: null | false | EventHandler<T, DragEvent>
+  ondragstart?: null | false | EventHandler<T, DragEvent>
+  ondrop?: null | false | EventHandler<T, DragEvent>
+  ondurationchange?: null | false | EventHandler<T, Event>
+  onemptied?: null | false | EventHandler<T, Event>
+  onencrypted?: null | false | EventHandler<T, Event>
+  onended?: null | false | EventHandler<T, Event>
+  onerror?: null | false | EventHandler<T, Event>
+  onfocus?: null | false | EventHandler<T, FocusEvent>
+  ongotpointercapture?: null | false | EventHandler<T, PointerEvent>
+  oninput?: null | false | EventHandler<T, InputEvent>
+  onkeydown?: null | false | EventHandler<T, KeyboardEvent>
+  onkeypress?: null | false | EventHandler<T, KeyboardEvent>
+  onkeyup?: null | false | EventHandler<T, KeyboardEvent>
+  onload?: null | false | EventHandler<T, Event>
+  onloadeddata?: null | false | EventHandler<T, Event>
+  onloadedmetadata?: null | false | EventHandler<T, Event>
+  onloadstart?: null | false | EventHandler<T, Event>
+  onlostpointercapture?: null | false | EventHandler<T, PointerEvent>
+  onmousedown?: null | false | EventHandler<T, MouseEvent>
+  onmouseenter?: null | false | EventHandler<T, MouseEvent>
+  onmouseleave?: null | false | EventHandler<T, MouseEvent>
+  onmousemove?: null | false | EventHandler<T, MouseEvent>
+  onmouseout?: null | false | EventHandler<T, MouseEvent>
+  onmouseover?: null | false | EventHandler<T, MouseEvent>
+  onmouseup?: null | false | EventHandler<T, MouseEvent>
+  onpaste?: null | false | EventHandler<T, ClipboardEvent>
+  onpause?: null | false | EventHandler<T, Event>
+  onplay?: null | false | EventHandler<T, Event>
+  onplaying?: null | false | EventHandler<T, Event>
+  onpointercancel?: null | false | EventHandler<T, PointerEvent>
+  onpointerdown?: null | false | EventHandler<T, PointerEvent>
+  onpointerenter?: null | false | EventHandler<T, PointerEvent>
+  onpointerleave?: null | false | EventHandler<T, PointerEvent>
+  onpointermove?: null | false | EventHandler<T, PointerEvent>
+  onpointerout?: null | false | EventHandler<T, PointerEvent>
+  onpointerover?: null | false | EventHandler<T, PointerEvent>
+  onpointerup?: null | false | EventHandler<T, PointerEvent>
+  onprogress?: null | false | EventHandler<T, Event>
+  onratechange?: null | false | EventHandler<T, Event>
+  onreset?: null | false | EventHandler<T, Event>
+  onscroll?: null | false | EventHandler<T, UIEvent>
+  onseeked?: null | false | EventHandler<T, Event>
+  onseeking?: null | false | EventHandler<T, Event>
+  onselect?: null | false | EventHandler<T, UIEvent>
+  onstalled?: null | false | EventHandler<T, Event>
+  onsubmit?: null | false | EventHandler<T, Event & { submitter: HTMLElement }>
+  onsuspend?: null | false | EventHandler<T, Event>
+  ontimeupdate?: null | false | EventHandler<T, Event>
+  ontouchcancel?: null | false | EventHandler<T, TouchEvent>
+  ontouchend?: null | false | EventHandler<T, TouchEvent>
+  ontouchmove?: null | false | EventHandler<T, TouchEvent>
+  ontouchstart?: null | false | EventHandler<T, TouchEvent>
+  ontransitionend?: null | false | EventHandler<T, TransitionEvent>
+  onvolumechange?: null | false | EventHandler<T, Event>
+  onwaiting?: null | false | EventHandler<T, Event>
+  onwheel?: null | false | EventHandler<T, WheelEvent>
 }
 export type HTMLAutocapitalize = 'off' | 'none' | 'on' | 'sentences' | 'words' | 'characters'
 export type HTMLAutocomplete =

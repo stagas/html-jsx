@@ -220,6 +220,7 @@ const special = {
   role: typeref('HTMLRole'),
   sandbox: typeref('HTMLIframeSandbox'),
   style: factory.createUnionTypeNode([
+    typeref('Partial<CSSStyleDeclaration>'),
     typeref('CSSProperties'),
     factory.createKeywordTypeNode(ts.SyntaxKind.StringKeyword),
   ]),
