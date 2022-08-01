@@ -20,6 +20,7 @@
     "node_modules/**/*",
     "coverage/**/*",
     "dist/**/*",
+    "types/**/*",
     ".swc/**/*",
     ".vscode/**/*"
   ],
