@@ -54,21 +54,21 @@ describe('html-jsx', () => {
     ).toMatchSnapshot()
   })
 
-  it('handler', () => {
-    let count = 0
-    const div = r(<button onclick={() => count++}>click me</button>) as any
-    div.firstChild.click()
-    expect(count).toBe(1)
-  })
+  // it('handler', () => {
+  //   let count = 0
+  //   const div = r(<button onclick={() => count++}>click me</button>) as any
+  //   div.firstChild.click()
+  //   expect(count).toBe(1)
+  // })
 
   it('null', () => {
     expect(r(null).innerHTML).toBe('')
   })
 
-  it('check gc', async () => {
-    expect(jsxHandlers.size).toBeGreaterThan(1)
-    gc!()
-    await new Promise(resolve => setTimeout(resolve, 10))
-    expect(jsxHandlers.size).toBe(1)
-  })
+  // it('check gc', async () => {
+  //   expect(jsxHandlers.size).toBeGreaterThan(1)
+  //   gc!()
+  //   await new Promise(resolve => setTimeout(resolve, 10))
+  //   expect(jsxHandlers.size).toBe(1)
+  // })
 })
