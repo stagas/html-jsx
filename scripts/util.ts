@@ -223,6 +223,10 @@ const special = {
     typeref('Partial<CSSStyleDeclaration>'),
     typeref('CSSProperties'),
     factory.createKeywordTypeNode(ts.SyntaxKind.StringKeyword),
+    // @ts-ignore
+    factory.createKeywordTypeNode(ts.SyntaxKind.FalseKeyword),
+    // @ts-ignore
+    factory.createKeywordTypeNode(ts.SyntaxKind.NullKeyword),
   ]),
   type: factory.createKeywordTypeNode(ts.SyntaxKind.StringKeyword), // TODO: this should be fixed in markuplint
   name: factory.createKeywordTypeNode(ts.SyntaxKind.StringKeyword), // TODO: this should be fixed in markuplint

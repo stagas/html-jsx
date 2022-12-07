@@ -390,7 +390,7 @@ interface HTMLAttributes<T> extends AriaAttributes, DOMAttributes<T> {
     /**
      * Contains CSS styling declarations to be applied to the element. Note that it is recommended for styles to be defined in a separate file or files. This attribute and the `<style>` element have mainly the purpose of allowing for quick styling, for example for testing purposes.
      *  */
-    "style"?: Partial<CSSStyleDeclaration> | StandardProperties | string;
+    "style"?: Partial<CSSStyleDeclaration> | StandardProperties | string | false | null;
     /**
      * An integer attribute indicating if the element can take input focus (is focusable), if it should participate to sequential keyboard navigation, and if so, at what position. It can take several values: a negative value means that the element should be focusable, but should not be reachable via sequential keyboard navigation; 0 means that the element should be focusable and reachable via sequential keyboard navigation, but its relative order is defined by the platform convention; a positive value means that the element should be focusable and reachable via sequential keyboard navigation; the order in which the elements are focused is the increasing value of the tabindex. If several elements share the same tabindex, their relative order follows their relative positions in the document.
      *  */
@@ -4210,7 +4210,7 @@ interface SVGAttributes<T> extends DOMAttributes<T> {
 }
 interface StylableSVGAttributes {
     class?: string;
-    style?: Partial<CSSStyleDeclaration> | StandardProperties | string;
+    style?: Partial<CSSStyleDeclaration> | StandardProperties | string | false | null;
 }
 interface TransformableSVGAttributes {
     transform?: string;

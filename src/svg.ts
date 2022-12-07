@@ -75,7 +75,7 @@ export interface SVGAttributes<T> extends DOMAttributes<T> {
 }
 interface StylableSVGAttributes {
   class?: string
-  style?: Partial<CSSStyleDeclaration> | CSSProperties | string
+  style?: Partial<CSSStyleDeclaration> | CSSProperties | string | false | null
 }
 interface TransformableSVGAttributes {
   transform?: string
